@@ -63,6 +63,10 @@ async def chat(
     agent = agent_sessions[session_id]
 
     try:
+        # Initialize embeddings and vector store explicitly for lazy loading
+        agent.kb_manager.init_embeddings()
+        agent.kb_manager.build_vector_store()
+        
         # Handle answers if provided
         if answers:
             try:

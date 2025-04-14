@@ -14,8 +14,8 @@ load_dotenv()
 class ShopifyAgent:
     def __init__(self):
         """Initialize the Shopify Developer Agent."""
-        # Initialize knowledge base and image analyzer
-        self.kb_manager = KnowledgeBaseManager()
+        # Initialize knowledge base and image analyzer (but don't load embeddings yet)
+        self.kb_manager = KnowledgeBaseManager(load_on_init=False)
         self.image_analyzer = ImageAnalyzer()
         
         # Base system prompt
@@ -112,11 +112,7 @@ Avant de commencer à coder une section demandée, tu dois toujours analyser la 
     
     def enhance_system_prompt_with_relevant_snippets(self, query):
         """Enhance the system prompt with relevant snippets from the knowledge base."""
-        # Ensure knowledge base is built
-        if not self.kb_manager.vector_store:
-            self.kb_manager.build_vector_store()
-        
-        # Query for relevant snippets
+        # The knowledge base will now init embeddings and build vector store on demand
         relevant_docs = self.kb_manager.query_knowledge_base(query, k=3)
         
         if not relevant_docs:

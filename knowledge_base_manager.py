@@ -18,14 +18,11 @@ class UTF8TextLoader(TextLoader):
         super().__init__(file_path, encoding="utf-8", autodetect_encoding=True)
 
 class KnowledgeBaseManager:
-    def __init__(self, base_dir="knowledge_base"):
+    def __init__(self, base_dir="knowledge_base", load_on_init=False):
         """Initialize the knowledge base manager."""
         self.base_dir = base_dir
         self.vector_store = None
-        
-        # Utiliser les embeddings Hugging Face (pas besoin de clé API)
-        print("Initialisation des embeddings HuggingFace...")
-        self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        self.embeddings = None
         
         # Create knowledge base directory if it doesn't exist
         if not os.path.exists(base_dir):
@@ -33,6 +30,18 @@ class KnowledgeBaseManager:
             
         # Path to store the index
         self.index_path = os.path.join(base_dir, "faiss_index")
+        
+        # Only load embeddings and vector store if explicitly requested
+        if load_on_init:
+            self.init_embeddings()
+            self.build_vector_store()
+    
+    def init_embeddings(self):
+        """Initialize embeddings only when needed."""
+        if self.embeddings is None:
+            print("📦 Chargement des embeddings...")
+            self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        return self.embeddings
     
     def add_snippet(self, content, filename=None):
         """Add a new Liquid snippet to the knowledge base."""
@@ -53,6 +62,9 @@ class KnowledgeBaseManager:
     
     def build_vector_store(self, rebuild=False):
         """Build or rebuild the vector store from all snippets."""
+        # Ensure embeddings are initialized
+        self.init_embeddings()
+        
         # 1. Check if the store is already loaded in memory and we are not forcing a rebuild
         if self.vector_store is not None and not rebuild:
             print("Using cached vector store from memory.")
@@ -130,7 +142,11 @@ class KnowledgeBaseManager:
     
     def query_knowledge_base(self, query, k=5):
         """Query the knowledge base for relevant snippets."""
+        # Ensure embeddings are initialized
+        self.init_embeddings()
+        
         if not self.vector_store:
+            print("📚 Chargement de la base FAISS...")
             self.build_vector_store()
             
         if not self.vector_store:
