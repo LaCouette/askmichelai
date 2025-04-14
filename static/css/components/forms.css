@@ -1,0 +1,230 @@
+/* Forms, inputs and related elements */
+input[type="text"] {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: -0.04em;
+  padding: var(--space-sm) var(--space-md);
+  width: 100%;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.form-field {
+  margin-bottom: var(--space-md);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Prompt Container */
+.prompt-container {
+  width: 100%;
+  max-width: 700px;
+  margin-top: var(--space-lg);
+}
+
+.prompt-input-wrapper {
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.prompt-input-wrapper:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.prompt-input-wrapper textarea {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.04em;
+  padding: var(--space-lg);
+  min-height: 120px;
+  resize: vertical;
+  outline: none;
+}
+
+.prompt-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Upload elements */
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.upload-btn:hover {
+  color: var(--text-primary);
+}
+
+.upload-preview {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.preview-image {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-width: 150px;
+}
+
+.preview-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.remove-btn {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Upload progress feedback */
+.upload-progress {
+  margin-top: var(--space-md);
+  border-radius: var(--radius-md);
+  height: 6px;
+  background-color: var(--bg-tertiary);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.upload-progress-bar {
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-md);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.upload-progress-bar.indeterminate {
+  width: 40%;
+  animation: progress-indeterminate 1.5s infinite ease-in-out;
+}
+
+/* Upload indicator for image button */
+.upload-indicator {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.upload-btn.uploading {
+  position: relative;
+}
+
+.upload-btn.uploading .upload-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Input field feedback */
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper.processing::after {
+  content: '';
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+/* Loading Animation and Feedback Indicators */
+.loading-dots {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-full);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Apply transition to form elements */
+.prompt-input-wrapper textarea,
+input[type="text"],
+.upload-btn {
+  transition: all var(--transition-normal);
+}
+
+/* Improved input styles */
+.settings-input:not(:placeholder-shown) {
+  border-color: var(--accent-secondary);
+} 

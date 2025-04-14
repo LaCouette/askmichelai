@@ -1,0 +1,381 @@
+/* Analysis page styles */
+.analysis-page {
+  position: relative;
+  padding: var(--space-xl);
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  display: none;
+  overflow: hidden;
+}
+
+/* Grid patterns for analysis page */
+.analysis-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.9)),
+    linear-gradient(to right, var(--grid-color-1) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color-1) 1px, transparent 1px),
+    radial-gradient(circle at 20% 30%, var(--grid-color-2) 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, var(--grid-accent) 0%, transparent 50%);
+  background-size: 
+    100% 100%,
+    30px 30px, 
+    30px 30px,
+    100% 100%,
+    100% 100%;
+  background-position: 0 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Larger grid overlay for analysis page */
+.analysis-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(92, 106, 196, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(92, 106, 196, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 30% 60%, rgba(92, 106, 196, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 70% 20%, rgba(80, 184, 60, 0.12) 0%, transparent 30%);
+  background-size: 
+    100px 100px, 
+    100px 100px,
+    100% 100%,
+    100% 100%;
+  background-position: 0 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.analysis-title {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.analysis-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+/* Add decorative circles to analysis steps */
+.analysis-steps::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--grid-color-1) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.analysis-steps::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  right: -150px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--grid-accent) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.step {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-subtle);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  margin-bottom: var(--space-md);
+}
+
+.step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.step-number {
+  background: var(--accent-gradient);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.step-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.step-content {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-left: 46px;
+}
+
+.step-content label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.step-content input[type="text"] {
+  margin-bottom: var(--space-md);
+}
+
+/* Step transition animations */
+.step.fade-in {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.step.fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+.analysis-steps button {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.analysis-steps button:hover {
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+/* Questions Section Styling */
+.questions-section {
+    margin-top: var(--space-xl);
+    padding: var(--space-xl);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Contain pseudo-elements */
+}
+
+.questions-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.1) 0%, transparent 40%);
+    animation: subtleRotate 20s linear infinite;
+    z-index: -1;
+}
+
+.questions-section h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+
+.questions-section p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Questions Form specific styles */
+.questions-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.question-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.question-item label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding-left: var(--space-xxs); /* Small indent */
+}
+
+.question-item input[type="text"] {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    font-size: 1rem;
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    outline: none;
+}
+
+.question-item input[type="text"]::placeholder {
+    color: var(--text-placeholder);
+    opacity: 0.7;
+}
+
+.question-item input[type="text"]:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
+}
+
+/* Submit button styling */
+.questions-form button[type="submit"] {
+    /* Reuse existing button styles if available or define modern ones */
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-top: var(--space-md); /* Add some space above the button */
+    align-self: center; /* Center the button */
+    width: fit-content;
+}
+
+.questions-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
+}
+
+/* Add keyframe for the subtle background animation */
+@keyframes subtleRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Remove old specific styles for questions form that might conflict */
+/* Commented out the old .questions-form and related styles */
+/*
+.questions-form {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-subtle);
+  margin-top: var(--space-xl);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.questions-form:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.questions-form h3 {
+  margin-bottom: var(--space-lg);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.question-item {
+  margin-bottom: var(--space-lg);
+  position: relative;
+  transition: all var(--transition-normal);
+  padding-left: var(--space-md);
+}
+
+.question-item:last-child {
+  margin-bottom: 0;
+}
+
+.question-item p {
+  margin-bottom: var(--space-xs);
+  color: var(--text-secondary);
+}
+
+.question-item input[type="text"] {
+  transition: all var(--transition-normal);
+}
+
+.question-item input[type="text"]:focus {
+  box-shadow: 0 0 10px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+/* Focused question item style * /
+.question-item.focused {
+  position: relative;
+}
+
+.question-item.focused::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-full);
+} 
+*/ 

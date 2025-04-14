@@ -1,0 +1,24 @@
+/* Main CSS file importing all component stylesheets */
+
+/* Base styles */
+@import 'components/variables.css';
+@import 'components/base.css';
+@import 'components/layout.css';
+@import 'components/animations.css';
+
+/* Components */
+@import 'components/header.css';
+@import 'components/footer.css';
+@import 'components/buttons.css';
+@import 'components/forms.css';
+@import 'components/hero.css';
+@import 'components/features.css';
+@import 'components/analysis.css';
+@import 'components/toast.css';
+@import 'components/result.css';
+@import 'components/social-proof.css';
+@import 'components/pricing.css';
+@import 'components/demo.css';
+
+/* Responsive styles - should be loaded last */
+@import 'components/responsive.css'; 

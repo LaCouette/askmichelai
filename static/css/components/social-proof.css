@@ -1,0 +1,69 @@
+/* Social Proof Section */
+.social-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin: var(--space-xl) 0;
+  width: 100%;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  min-width: 180px;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.proof-icon {
+  font-size: 1.4rem;
+  color: var(--accent-secondary);
+  flex-shrink: 0;
+}
+
+.proof-item p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.proof-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Sticky Bar */
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform var(--transition-normal);
+  box-shadow: var(--shadow-lg);
+}
+
+.sticky-bar.visible {
+  transform: translateY(0);
+}
+
+.sticky-bar p {
+  font-weight: 500;
+  color: var(--text-primary);
+} 

@@ -1,0 +1,51 @@
+/* Header styles */
+header {
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logo h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.logo-icon {
+  color: var(--accent-primary);
+}
+
+.main-nav {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.nav-btn:hover {
+  color: var(--text-primary);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+} 

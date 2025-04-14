@@ -1,0 +1,3169 @@
+{% comment %}
+---------------------------------------------------------
+Copyright © 2023 Section Store. All rights reserved.
+Unauthorized copying, modification, distribution, or use
+of this code or any portion of it, is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact daniel@section.store
+---------------------------------------------------------
+{% endcomment %}
+
+{%- liquid 
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign margin_horizontal = section.settings.margin_horizontal
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+  assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
+  assign section_radius = section.settings.section_radius
+
+  assign content_align = section.settings.content_align
+  assign content_align_mobile = section.settings.content_align_mobile
+
+  assign content_horizontal_align = ""
+  if content_align == "center"
+    assign content_horizontal_align = "center"
+  elsif content_align == "right"
+    assign content_horizontal_align = "end"
+  else
+    assign content_horizontal_align = "start"
+  endif
+
+  assign content_horizontal_align_mobile = ""
+  if content_align_mobile == "center"
+    assign content_horizontal_align_mobile = "center"
+  elsif content_align_mobile == "right"
+    assign content_horizontal_align_mobile = "end"
+  else
+    assign content_horizontal_align_mobile = "start"
+  endif
+
+  assign layout = section.settings.layout
+  assign layout_mobile = section.settings.layout_mobile
+  assign layout_mt = section.settings.layout_mt
+  assign layout_mt_mobile = section.settings.layout_mt_mobile
+  assign layout_gap = section.settings.layout_gap
+  assign layout_gap_mobile = section.settings.layout_gap_mobile
+
+  assign card_padding_horizontal = section.settings.card_padding_horizontal
+  assign card_padding_horizontal_mobile = section.settings.card_padding_horizontal_mobile
+  assign card_padding_vertical = section.settings.card_padding_vertical
+  assign card_padding_vertical_mobile = section.settings.card_padding_vertical_mobile
+  assign card_radius = section.settings.card_radius
+  assign card_border_thickness = section.settings.card_border_thickness
+  assign card_border_color = section.settings.card_border_color
+  assign card_bg_color = section.settings.card_bg_color
+
+  assign card_title_size = section.settings.card_title_size
+  assign card_title_size_mobile = section.settings.card_title_size_mobile
+  assign card_title_color = section.settings.card_title_color
+  assign card_title_custom = section.settings.card_title_custom
+  assign card_title_font = section.settings.card_title_font
+  assign card_title_height = section.settings.card_title_height
+
+  assign badge_size = section.settings.badge_size
+  assign badge_size_mobile = section.settings.badge_size_mobile
+  assign badge_custom = section.settings.badge_custom
+  assign badge_font = section.settings.badge_font
+  assign badge_height = section.settings.badge_height
+  assign badge_padding_horizontal = section.settings.badge_padding_horizontal
+  assign badge_padding_horizontal_mobile = section.settings.badge_padding_horizontal_mobile
+  assign badge_padding_vertical = section.settings.badge_padding_vertical
+  assign badge_padding_vertical_mobile = section.settings.badge_padding_vertical_mobile
+  assign badge_radius = section.settings.badge_radius
+  assign badge_border_thickness = section.settings.badge_border_thickness
+
+  assign card_text = section.settings.card_text
+  assign card_text_size = section.settings.card_text_size
+  assign card_text_size_mobile = section.settings.card_text_size_mobile
+  assign card_text_color = section.settings.card_text_color
+  assign card_text_custom = section.settings.card_text_custom
+  assign card_text_font = section.settings.card_text_font
+  assign card_text_height = section.settings.card_text_height
+
+  assign features_mt = section.settings.features_mt
+  assign features_mt_mobile = section.settings.features_mt_mobile
+  assign features_gap = section.settings.features_gap
+  assign features_gap_mobile = section.settings.features_gap_mobile
+  assign features_divider_thickness = section.settings.features_divider_thickness
+  assign features_divider_color = section.settings.features_divider_color
+  assign feature_check_color = section.settings.feature_check_color
+  assign feature_minus_color = section.settings.feature_minus_color
+
+  assign feature_title_size = section.settings.feature_title_size
+  assign feature_title_size_mobile = section.settings.feature_title_size_mobile
+  assign feature_title_color = section.settings.feature_title_color
+  assign feature_title_custom = section.settings.feature_title_custom
+  assign feature_title_font = section.settings.feature_title_font
+  assign feature_title_height = section.settings.feature_title_height
+
+  assign button_size = section.settings.button_size
+  assign button_size_mobile = section.settings.button_size_mobile
+  assign button_color = section.settings.button_color
+  assign button_hover_color = section.settings.button_hover_color
+  assign button_custom = section.settings.button_custom
+  assign button_font = section.settings.button_font
+  assign button_height = section.settings.button_height
+  assign button_padding_vertical = section.settings.button_padding_vertical
+  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
+  assign button_padding_horizontal = section.settings.button_padding_horizontal
+  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
+  assign button_radius = section.settings.button_radius
+  assign button_border_thickness = section.settings.button_border_thickness
+  assign button_border_color = section.settings.button_border_color
+  assign button_border_hover_color = section.settings.button_border_hover_color
+  assign button_bg_color = section.settings.button_bg_color
+  assign button_bg_hover_color = section.settings.button_bg_hover_color
+  assign button_style = section.settings.button_style
+  assign button_mt = section.settings.button_mt
+  assign button_mt_mobile = section.settings.button_mt_mobile
+
+  assign toggle_cards_gap_mobile = section.settings.toggle_cards_gap_mobile
+  assign toggle_cards_gap = section.settings.toggle_cards_gap
+
+  assign toggle_card_padding_horizontal = section.settings.toggle_card_padding_horizontal
+  assign toggle_card_padding_horizontal_mobile = section.settings.toggle_card_padding_horizontal_mobile
+  assign toggle_card_padding_vertical = section.settings.toggle_card_padding_vertical
+  assign toggle_card_padding_vertical_mobile = section.settings.toggle_card_padding_vertical_mobile
+  assign toggle_card_radius = section.settings.toggle_card_radius
+  assign toggle_card_border_thickness = section.settings.toggle_card_border_thickness
+  assign toggle_card_border_color = section.settings.toggle_card_border_color
+  assign toggle_card_border_active_color = section.settings.toggle_card_border_active_color
+  assign toggle_card_border_hover_color = section.settings.toggle_card_border_hover_color
+  assign toggle_card_bg_color = section.settings.toggle_card_bg_color
+  assign toggle_card_bg_active_color = section.settings.toggle_card_bg_active_color
+  assign toggle_card_bg_hover_color = section.settings.toggle_card_bg_hover_color
+
+  assign toggle_subtitle = section.settings.toggle_subtitle
+  assign toggle_subtitle_size = section.settings.toggle_subtitle_size
+  assign toggle_subtitle_size_mobile = section.settings.toggle_subtitle_size_mobile
+  assign toggle_subtitle_color = section.settings.toggle_subtitle_color
+  assign toggle_subtitle_custom = section.settings.toggle_subtitle_custom
+  assign toggle_subtitle_font = section.settings.toggle_subtitle_font
+  assign toggle_subtitle_height = section.settings.toggle_subtitle_height
+
+  assign toggle_title_size = section.settings.toggle_title_size
+  assign toggle_title_size_mobile = section.settings.toggle_title_size_mobile
+  assign toggle_title_color = section.settings.toggle_title_color
+  assign toggle_title_custom = section.settings.toggle_title_custom
+  assign toggle_title_font = section.settings.toggle_title_font
+  assign toggle_title_height = section.settings.toggle_title_height
+  assign toggle_title_mt = section.settings.toggle_title_mt
+  assign toggle_title_mt_mobile = section.settings.toggle_title_mt_mobile
+
+  assign toggle_main_price_size = section.settings.toggle_main_price_size
+  assign toggle_main_price_size_mobile = section.settings.toggle_main_price_size_mobile
+  assign toggle_main_price_color = section.settings.toggle_main_price_color
+  assign toggle_main_price_custom = section.settings.toggle_main_price_custom
+  assign toggle_main_price_font = section.settings.toggle_main_price_font
+  assign toggle_main_price_height = section.settings.toggle_main_price_height
+
+  assign toggle_old_price_size = section.settings.toggle_old_price_size
+  assign toggle_old_price_size_mobile = section.settings.toggle_old_price_size_mobile
+  assign toggle_old_price_color = section.settings.toggle_old_price_color
+  assign toggle_old_price_custom = section.settings.toggle_old_price_custom
+  assign toggle_old_price_font = section.settings.toggle_old_price_font
+  assign toggle_old_price_height = section.settings.toggle_old_price_height
+
+  assign price_text = section.settings.price_text
+  assign price_text_size = section.settings.price_text_size
+  assign price_text_size_mobile = section.settings.price_text_size_mobile
+  assign price_text_color = section.settings.price_text_color
+  assign price_text_custom = section.settings.price_text_custom
+  assign price_text_font = section.settings.price_text_font
+  assign price_text_height = section.settings.price_text_height
+
+  assign feature_message_size = section.settings.feature_message_size
+  assign feature_message_size_mobile = section.settings.feature_message_size_mobile
+  assign feature_message_color = section.settings.feature_message_color
+  assign feature_message_bg_color = section.settings.feature_message_bg_color
+  assign feature_message_icon_color = section.settings.feature_message_icon_color
+  assign feature_message_custom = section.settings.feature_message_custom
+  assign feature_message_font = section.settings.feature_message_font
+  assign feature_message_height = section.settings.feature_message_height
+  
+-%}
+
+{%- style -%}
+
+  {{ card_title_font | font_face: font_display: 'swap' }}
+  {{ badge_font | font_face: font_display: 'swap' }}
+  {{ card_text_font | font_face: font_display: 'swap' }}
+  {{ feature_title_font | font_face: font_display: 'swap' }}
+  {{ button_font | font_face: font_display: 'swap' }}
+  {{ toggle_subtitle_font | font_face: font_display: 'swap' }}
+  {{ toggle_title_font | font_face: font_display: 'swap' }}
+  {{ toggle_main_price_font | font_face: font_display: 'swap' }}
+  {{ toggle_old_price_font | font_face: font_display: 'swap' }}
+  {{ price_text_font | font_face: font_display: 'swap' }}
+  {{ feature_message_font | font_face: font_display: 'swap' }}
+  
+  .section-{{ section.id }} {
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+    margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: {{ margin_horizontal_mobile }}rem;
+    margin-right: {{ margin_horizontal_mobile }}rem;
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
+    overflow: hidden;
+  }
+  
+  .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: {{ padding_horizontal_mobile }}rem;
+    padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .pricing-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ content_horizontal_align_mobile }};
+  }
+
+  .pricing-body-{{ section.id }} {
+    display: grid;
+    margin-top: {{ layout_mt_mobile }}px;
+    gap: {{ layout_gap_mobile }}px;
+  }
+
+  .pricing-card-{{ section.id }} {
+    display: none;
+    background-color: {{ card_bg_color }};
+    padding: {{ card_padding_vertical_mobile }}px {{ card_padding_horizontal_mobile }}px;
+    border: {{ card_border_thickness }}px solid {{ card_border_color }};
+    border-radius: {{ card_radius }}px;
+  }
+
+  .pricing-card-{{ section.id }}.active {
+    display: block;
+  }
+
+  .pricing-card-top-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .pricing-card-left-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-card-title-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ card_title_size_mobile }}px;
+    color: {{ card_title_color }};
+    line-height: {{ card_title_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .pricing-card-badge-{{ section.id }} {
+    margin: 0px;
+    padding: {{ badge_padding_vertical_mobile }}px {{ badge_padding_horizontal_mobile }}px;
+    border-radius: {{ badge_radius }}px;
+    font-size: {{ badge_size_mobile }}px;
+    line-height: {{ badge_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+  }
+
+  .pricing-card-text-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ card_text_size_mobile }}px;
+    color: {{ card_text_color }};
+    line-height: {{ card_text_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+  }
+
+  .pricing-card-features-{{ section.id }} {
+    margin-top: {{ features_mt_mobile }}px;
+    display: flex;
+    flex-direction: column;
+    gap: {{ features_gap_mobile }}px;
+  }
+
+  .pricing-card-features-divider-{{ section.id }}:not(:last-child) {
+    display: block !important;
+    height: {{ features_divider_thickness }}px;
+    width: 100%;
+    background-color: {{ features_divider_color }};
+  }
+
+  .pricing-card-feature-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .pricing-card-feature-left-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-card-feature-title-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ feature_title_size_mobile }}px;
+    color: {{ feature_title_color }};
+    line-height: {{ feature_title_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .pricing-card-feature-icon-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .pricing-card-button-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    margin-top: {{ button_mt_mobile }}px;
+    font-size: {{ button_size_mobile }}px;
+    color: {{ button_color }};
+    line-height: {{ button_height }}%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
+    border-radius: {{ button_radius }}px;
+    transition: all 0.25s ease 0s;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .pricing-card-button-inner-{{ section.id }} {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .pricing-card-button-{{ section.id }}:hover {
+    color: {{ button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .pricing-card-button-{{ section.id }} svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .pricing-card-button-{{ section.id }} svg path {
+    fill: {{ button_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .pricing-card-button-{{ section.id }}:hover svg path {
+    fill: {{ button_hover_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .pricing-toggle-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: {{ toggle_card_bg_color }};
+    padding: {{ toggle_card_padding_vertical_mobile }}px {{ toggle_card_padding_horizontal_mobile }}px;
+    border: {{ toggle_card_border_thickness }}px solid {{ toggle_card_border_color }};
+    border-radius: {{ toggle_card_radius }}px;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+  }
+
+  .pricing-toggle-{{ section.id }}:not(:first-child) {
+    margin-top: {{ toggle_cards_gap_mobile }}px;
+  }
+
+  .pricing-toggle-{{ section.id }}.active {
+    background-color: {{ toggle_card_bg_active_color }};
+    border-color: {{ toggle_card_border_active_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .pricing-toggle-title-wrapper-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-toggle-subtitle-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ toggle_subtitle_size_mobile }}px;
+    color: {{ toggle_subtitle_color }};
+    line-height: {{ toggle_subtitle_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+  }
+
+  .pricing-toggle-title-{{ section.id }} {
+    margin: 0px;
+    margin-top: {{ toggle_title_mt_mobile }}px;
+    font-size: {{ toggle_title_size_mobile }}px;
+    color: {{ toggle_title_color }};
+    line-height: {{ toggle_title_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .pricing-toggle-prices-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-toggle-main-price-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ toggle_main_price_size_mobile }}px;
+    color: {{ toggle_main_price_color }};
+    line-height: {{ toggle_main_price_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .pricing-toggle-old-price-{{ section.id }} {
+    margin: 0px;
+    margin-bottom: 4px;
+    font-size: {{ toggle_old_price_size_mobile }}px;
+    color: {{ toggle_old_price_color }};
+    line-height: {{ toggle_old_price_height }}%;
+    text-transform: unset;
+    text-decoration: line-through;
+  }
+
+  .pricing-toggle-price-text-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ price_text_size_mobile }}px;
+    color: {{ price_text_color }};
+    line-height: {{ price_text_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+  }
+
+  .pricing-card-feature-message-{{ section.id }} {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .pricing-card-feature-message-icon-{{ section.id }} {
+    display: flex;
+  }
+
+  .pricing-card-feature-message-icon-{{ section.id }} svg path {
+    fill: {{ feature_message_icon_color }};
+  }
+
+  .pricing-card-feature-message-text-{{ section.id }} {
+    min-width: max-content;
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    bottom: calc(100% + 5px);
+    opacity: 0;
+    pointer-events: none;
+    margin: 0px;
+    background-color: {{ feature_message_bg_color }};
+    font-size: {{ feature_message_size_mobile }}px;
+    color: {{ feature_message_color }};
+    line-height: {{ feature_message_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 6px;
+    transition: all 0.25s ease 0s;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  }
+
+  .pricing-card-feature-message-{{ section.id }}:hover .pricing-card-feature-message-text-{{ section.id }} {
+    transform: translateX(-50%) translateY(0px);
+    opacity: 1;
+    pointer-events: all;
+    transition: all 0.25s ease 0s;
+  }
+  
+  @media(min-width: 1024px) {
+
+    .section-{{ section.id }} {
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+      margin-left: {{ margin_horizontal }}rem;
+      margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
+    }
+    
+    .section-{{ section.id }}-settings {
+      padding: 0 5rem;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_horizontal }}rem;
+      padding-right: {{ padding_horizontal }}rem;
+    }
+
+    .pricing-content-{{ section.id }} {
+      align-items: {{ content_horizontal_align }};
+    }
+
+     .pricing-body-{{ section.id }} {
+      grid-template-columns: 1fr 1fr;
+       margin-top: {{ layout_mt }}px;
+      gap: {{ layout_gap }}px;
+    }
+
+    .pricing-card-{{ section.id }} {
+      padding: {{ card_padding_vertical }}px {{ card_padding_horizontal }}px;
+    }
+
+    .pricing-card-title-{{ section.id }} {
+      font-size: {{ card_title_size }}px;
+    }
+
+    .pricing-card-badge-{{ section.id }} {
+      padding: {{ badge_padding_vertical }}px {{ badge_padding_horizontal }}px;
+      font-size: {{ badge_size }}px;
+    }
+
+    .pricing-card-text-{{ section.id }} {
+      font-size: {{ card_text_size }}px;
+    }
+
+    .pricing-card-features-{{ section.id }} {
+      margin-top: {{ features_mt }}px;
+      gap: {{ features_gap }}px;
+    }
+
+    .pricing-card-feature-title-{{ section.id }} {
+      font-size: {{ feature_title_size }}px;
+    }
+
+    .pricing-card-feature-message-text-{{ section.id }} {
+      font-size: {{ feature_message_size }}px;
+    }
+
+    .pricing-card-button-{{ section.id }} {
+      margin-top: {{ button_mt }}px;
+      padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
+      font-size: {{ button_size }}px;
+    }
+
+    .pricing-toggle-{{ section.id }}:not(.active):hover {
+      background-color: {{ toggle_card_bg_hover_color }};
+      border-color: {{ toggle_card_border_hover_color }};
+      transition: all 0.25s ease 0s;
+    }
+
+    .pricing-toggle-{{ section.id }}:not(:first-child) {
+      margin-top: {{ toggle_cards_gap }}px;
+    }
+
+    .pricing-toggle-{{ section.id }} {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: {{ toggle_card_padding_vertical }}px {{ toggle_card_padding_horizontal }}px;
+    }
+
+    .pricing-toggle-subtitle-{{ section.id }} {
+      font-size: {{ toggle_subtitle_size }}px;
+    }
+
+    .pricing-toggle-title-{{ section.id }} {
+      margin-top: {{ toggle_title_mt }}px;
+      font-size: {{ toggle_title_size }}px;
+    }
+
+    .pricing-toggle-main-price-{{ section.id }} {
+      font-size: {{ toggle_main_price_size }}px;
+    }
+
+    .pricing-toggle-old-price-{{ section.id }} {
+      font-size: {{ toggle_old_price_size }}px;
+    }
+
+    .pricing-toggle-price-text-{{ section.id }} {
+      font-size: {{ price_text_size }}px;
+    }
+  }
+  
+{%- endstyle -%}
+
+{% unless full_width %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: {{ content_width }}px;
+    }
+  </style>
+{% endunless %}
+
+{% if margin_horizontal_mobile > 0 %}
+  <style>
+    .section-{{ section.id }} {
+      border-left: solid {{ border_color }} {{ border_thickness }}px;
+      border-right: solid {{ border_color }} {{ border_thickness }}px;
+    }
+    
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: 0px;
+        border-right: 0px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if margin_horizontal > 0 %}
+  <style>
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: solid {{ border_color }} {{ border_thickness }}px;
+        border-right: solid {{ border_color }} {{ border_thickness }}px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if card_title_custom %}
+  <style>
+    .pricing-card-title-{{ section.id }} {
+      font-family: {{ card_title_font.family }}, {{ card_title_font.fallback_families }};
+      font-weight: {{ card_title_font.weight }};
+      font-style: {{ card_title_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if badge_custom %}
+  <style>
+    .pricing-card-badge-{{ section.id }} {
+      font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+      font-weight: {{ badge_font.weight }};
+      font-style: {{ badge_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if card_text_custom %}
+  <style>
+    .pricing-card-text-{{ section.id }} {
+      font-family: {{ card_text_font.family }}, {{ card_text_font.fallback_families }};
+      font-weight: {{ card_text_font.weight }};
+      font-style: {{ card_text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if feature_title_custom %}
+  <style>
+    .pricing-card-feature-title-{{ section.id }} {
+      font-family: {{ feature_title_font.family }}, {{ feature_title_font.fallback_families }};
+      font-weight: {{ feature_title_font.weight }};
+      font-style: {{ feature_title_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if button_custom %}
+  <style>
+    .pricing-card-button-{{ section.id }} {
+      font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-weight: {{ button_font.weight }};
+      font-style: {{ button_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_subtitle_custom %}
+  <style>
+    .pricing-toggle-subtitle-{{ section.id }} {
+      font-family: {{ toggle_subtitle_font.family }}, {{ toggle_subtitle_font.fallback_families }};
+      font-weight: {{ toggle_subtitle_font.weight }};
+      font-style: {{ toggle_subtitle_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_title_custom %}
+  <style>
+    .pricing-toggle-title-{{ section.id }} {
+      font-family: {{ toggle_title_font.family }}, {{ toggle_title_font.fallback_families }};
+      font-weight: {{ toggle_title_font.weight }};
+      font-style: {{ toggle_title_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_main_price_custom %}
+  <style>
+    .pricing-toggle-main-price-{{ section.id }} {
+      font-family: {{ toggle_main_price_font.family }}, {{ toggle_main_price_font.fallback_families }};
+      font-weight: {{ toggle_main_price_font.weight }};
+      font-style: {{ toggle_main_price_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_old_price_custom %}
+  <style>
+    .pricing-toggle-old-price-{{ section.id }} {
+      font-family: {{ toggle_old_price_font.family }}, {{ toggle_old_price_font.fallback_families }};
+      font-weight: {{ toggle_old_price_font.weight }};
+      font-style: {{ toggle_old_price_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if price_text_custom %}
+  <style>
+    .pricing-toggle-price-text-{{ section.id }} {
+      font-family: {{ price_text_font.family }}, {{ price_text_font.fallback_families }};
+      font-weight: {{ price_text_font.weight }};
+      font-style: {{ price_text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if feature_message_custom %}
+  <style>
+    .pricing-card-feature-message-{{ section.id }} {
+      font-family: {{ feature_message_font.family }}, {{ feature_message_font.fallback_families }};
+      font-weight: {{ feature_message_font.weight }};
+      font-style: {{ feature_message_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if layout_mobile == 'card_toggles'%}
+  <style>
+    .pricing-cards-{{ section.id }} {
+      order: 1;
+    }
+
+    .pricing-toggles-{{ section.id }} {
+      order: 2;
+    }
+  </style>
+{% elsif layout_mobile == 'toggles_cards' %}
+  <style>
+    .pricing-cards-{{ section.id }} {
+      order: 2;
+    }
+    
+    .pricing-toggles-{{ section.id }} {
+      order: 1;
+    }
+  </style>
+{% endif %}
+
+{% if layout == 'cards_toggles'%}
+  <style>
+    @media(min-width: 1024px) {
+      .pricing-cards-{{ section.id }} {
+        order: 1;
+      }
+
+      .pricing-toggles-{{ section.id }} {
+        order: 2;
+      }
+    }    
+  </style>
+{% elsif layout == 'toggles_cards' %}
+  <style>
+    @media(min-width: 1024px) {
+      .pricing-cards-{{ section.id }} {
+        order: 2;
+      }
+
+      .pricing-toggles-{{ section.id }} {
+        order: 1;
+      }
+    }   
+  </style>
+{% endif %}
+
+{% if button_style == "non_outline" or button_style == "non_outline_arrow" %}
+  <style>
+    .pricing-card-button-{{ section.id }} {
+      background-color: {{ button_bg_color }};
+    }
+
+    .pricing-card-button-{{ section.id }}:hover {
+      background-color: {{ button_bg_hover_color }};
+    }
+  </style>
+{% elsif button_style == "outline" or button_style == "outline_arrow" %}
+  <style>
+    .pricing-card-button-{{ section.id }} {
+      background-color: {{ button_bg_color }};
+      border: {{ button_border_thickness }}px solid {{ button_border_color }};
+    }
+
+    .pricing-card-button-{{ section.id }}:hover {
+      background-color: {{ button_bg_hover_color }};
+      border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
+    }
+  </style>
+{% elsif button_style == "link" %}
+  <style>
+    .pricing-card-button-{{ section.id }} {
+      padding: 0px !important;
+    }
+  </style>
+{% endif %}
+
+{% for block in section.blocks %}
+  {% case block.type %}    
+
+    {% when 'subheading' %}
+      <style>
+        {{  block.settings.sub_heading_font | font_face: font_display: 'swap' }}
+
+        .feature-subheading-{{ block.id }} {
+          margin-top: {{ block.settings.sub_heading_mt_mobile }}px;
+          text-align: {{ content_align_mobile }};
+        }
+
+        .feature-subheading-{{ block.id }} * {          
+          margin: 0;            
+          font-size: {{ block.settings.sub_heading_size_mobile }}px;
+          color: {{ block.settings.sub_heading_color }};
+          line-height: {{ block.settings.sub_heading_height }}%;
+          text-transform: unset;
+          text-decoration: none;
+          word-break: break-word;
+          font-weight: 700;
+        }          
+
+        @media(min-width: 1024px) {
+          .feature-subheading-{{ block.id }} {
+            margin-top: {{ block.settings.sub_heading_mt }}px;
+            text-align: {{ content_align }};
+          }
+
+          .feature-subheading-{{ block.id }} * {                
+            font-size: {{ block.settings.sub_heading_size }}px;
+          }  
+        }
+      </style>
+
+      {% if block.settings.sub_heading_custom %}
+        <style>
+          .feature-subheading-{{ block.id }} * {
+            font-family: {{ block.settings.sub_heading_font.family }}, {{ block.settings.sub_heading_font.fallback_families }};
+            font-weight: {{ block.settings.sub_heading_font.weight }};
+            font-style: {{ block.settings.sub_heading_font.style }};
+          }
+        </style>
+      {% endif %}
+    
+    {% when 'heading' %}
+      <style>
+        {{  block.settings.heading_font | font_face: font_display: 'swap' }}
+
+        .feature-heading-{{ block.id }} {
+          margin-top: {{ block.settings.heading_mt_mobile }}px;
+          text-align: {{ content_align_mobile }};
+        }
+
+        .feature-heading-{{ block.id }} * {          
+          margin: 0;            
+          font-size: {{ block.settings.heading_size_mobile }}px;
+          color: {{ block.settings.heading_color }};
+          line-height: {{ block.settings.heading_height }}%;
+          text-transform: unset;
+          text-decoration: none;
+          word-break: break-word;
+          font-weight: 700;
+        }     
+
+        .feature-heading-{{ block.id }} strong {
+          color: {{ block.settings.heading_other_color }};
+        }
+
+        @media(min-width: 1024px) {
+          .feature-heading-{{ block.id }} {
+            margin-top: {{ block.settings.heading_mt }}px;
+            text-align: {{ content_align }};
+          }
+
+          .feature-heading-{{ block.id }} * {                
+            font-size: {{ block.settings.heading_size }}px;
+          }  
+        }
+      </style>
+
+      {% if block.settings.heading_custom %}
+        <style>
+          .feature-heading-{{ block.id }} * {
+            font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+            font-weight: {{ block.settings.heading_font.weight }};
+            font-style: {{ block.settings.heading_font.style }};
+          }
+        </style>
+      {% endif %}
+
+    {% when 'text' %}  
+      <style>
+        {{  block.settings.text_font | font_face: font_display: 'swap' }}
+
+        .feature-text-{{ block.id }} {
+          margin-top: {{ block.settings.text_mt_mobile }}px;
+          text-align: {{ content_align_mobile }};
+          max-width: {{ block.settings.text_max_width_mobile }}%;
+        }
+
+        .feature-text-{{ block.id }} * {          
+          margin: 0;            
+          font-size: {{ block.settings.text_size_mobile }}px;
+          color: {{ block.settings.text_color }};
+          line-height: {{ block.settings.text_height }}%;
+          text-transform: unset;
+          text-decoration: none;
+          word-break: break-word;
+        }  
+
+        @media(min-width: 1024px) {
+          .feature-text-{{ block.id }} {
+            margin-top: {{ block.settings.text_mt }}px;
+            text-align: {{ content_align }};
+            max-width: {{ block.settings.text_max_width }}%;
+          }
+
+          .feature-text-{{ block.id }} * {                
+            font-size: {{ block.settings.text_size }}px;
+          }  
+        }
+      </style>
+
+      {% if block.settings.text_custom %}
+        <style>
+          .feature-text-{{ block.id }} * {
+            font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+            font-weight: {{ block.settings.text_font.weight }};
+            font-style: {{ block.settings.text_font.style }};
+          }
+        </style>
+      {% endif %}
+
+    {% when 'plan' %}
+
+      <style>
+        .pricing-card-badge-{{ block.id }} {
+          background-color: {{ block.settings.badge_bg_color }};
+          border: {{ badge_border_thickness }}px solid {{ block.settings.badge_border_color }};
+          color: {{ block.settings.badge_color }};
+        }
+      </style>
+    
+  {% endcase %}
+{% endfor %}
+
+<div class="section-{{ section.id }} pricing-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
+      <div class="pricing-content-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+
+            {% when 'subheading' %}
+              {% if block.settings.sub_heading != blank %}
+                <div class="feature-subheading-{{ block.id }}">{{ block.settings.sub_heading }}</div>
+              {% endif %}
+            
+            {% when 'heading' %}
+              {% if block.settings.heading != blank %}
+                <div class="feature-heading-{{ block.id }}">{{ block.settings.heading }}</div>
+              {% endif %}
+  
+            {% when 'text' %}
+              {% if block.settings.text != blank %}
+                <div class="feature-text-{{ block.id }}">{{ block.settings.text }}</div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+
+      <div class="pricing-body-{{ section.id }}">
+        <div class="pricing-cards-{{ section.id }}">
+          {% assign first_card_plan = true %}
+          {% for block in section.blocks %}
+            {% if block.type == "plan" %}
+              <div class="pricing-card-{{ section.id }} {% if first_card_plan %}active{% endif %}" data-id="{{ block.id }}">
+                <div class="pricing-card-top-{{ section.id }}">
+                  <div class="pricing-card-left-{{ section.id }}">
+                    {% if block.settings.title != blank %}
+                      <p class="pricing-card-title-{{ section.id }}">{{ block.settings.title }}</p>
+                    {% endif %}
+                    {% if block.settings.badge != blank %}
+                      <p class="pricing-card-badge-{{ section.id }} pricing-card-badge-{{ block.id }}">{{ block.settings.badge }}</p>
+                    {% endif %}
+                  </div>
+                  {% if card_text != blank %}
+                    <p class="pricing-card-text-{{ section.id }}">{{ card_text }}</p>
+                  {% endif %}
+                </div>
+
+                <div class="pricing-card-features-{{ section.id }}">
+                  {% if block.settings.first_feature != blank %}
+                    <div class="pricing-card-feature-{{ section.id }}">
+                      <div class="pricing-card-feature-left-{{ section.id }}">
+                        <p class="pricing-card-feature-title-{{ section.id }}">{{ block.settings.first_feature }}</p>
+                        {% if block.settings.first_feature_message != blank %}
+                          <div class="pricing-card-feature-message-{{ section.id }}">
+                            <div class="pricing-card-feature-message-icon-{{ section.id }}">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 19.5C7.85775 19.5 4.5 16.1422 4.5 12C4.5 7.85775 7.85775 4.5 12 4.5C16.1422 4.5 19.5 7.85775 19.5 12C19.5 16.1422 16.1422 19.5 12 19.5ZM11.25 11.25V15.75H12.75V11.25H11.25ZM11.25 8.25V9.75H12.75V8.25H11.25Z" fill="currentColor"></path>
+                              </svg>
+                            </div>
+                            <p class="pricing-card-feature-message-text-{{ section.id }}">{{ block.settings.first_feature_message }}</p>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="pricing-card-feature-icon-{{ section.id }}">
+                        {% if block.settings.first_feature_value == "yes" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="{{ feature_check_color }}"></path>
+                          </svg>
+                        {% else %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 11.0002V13.0002H19V11.0002H5Z" fill="{{ feature_minus_color }}"></path>
+                          </svg>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% if features_divider_thickness > 0 %}
+                      <div class="pricing-card-features-divider-{{ section.id }}"></div>
+                    {% endif %}
+                  {% endif %}
+                  {% if block.settings.second_feature != blank %}
+                    <div class="pricing-card-feature-{{ section.id }}">
+                      <div class="pricing-card-feature-left-{{ section.id }}">
+                        <p class="pricing-card-feature-title-{{ section.id }}">{{ block.settings.second_feature }}</p>
+                        {% if block.settings.second_feature_message != blank %}
+                          <div class="pricing-card-feature-message-{{ section.id }}">
+                            <div class="pricing-card-feature-message-icon-{{ section.id }}">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 19.5C7.85775 19.5 4.5 16.1422 4.5 12C4.5 7.85775 7.85775 4.5 12 4.5C16.1422 4.5 19.5 7.85775 19.5 12C19.5 16.1422 16.1422 19.5 12 19.5ZM11.25 11.25V15.75H12.75V11.25H11.25ZM11.25 8.25V9.75H12.75V8.25H11.25Z" fill="currentColor"></path>
+                              </svg>
+                            </div>
+                            <p class="pricing-card-feature-message-text-{{ section.id }}">{{ block.settings.second_feature_message }}</p>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="pricing-card-feature-icon-{{ section.id }}">
+                        {% if block.settings.second_feature_value == "yes" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="{{ feature_check_color }}"></path>
+                          </svg>
+                        {% else %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 11.0002V13.0002H19V11.0002H5Z" fill="{{ feature_minus_color }}"></path>
+                          </svg>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% if features_divider_thickness > 0 %}
+                      <div class="pricing-card-features-divider-{{ section.id }}"></div>
+                    {% endif %}
+                  {% endif %}
+                  {% if block.settings.third_feature != blank %}
+                    <div class="pricing-card-feature-{{ section.id }}">
+                      <div class="pricing-card-feature-left-{{ section.id }}">
+                        <p class="pricing-card-feature-title-{{ section.id }}">{{ block.settings.third_feature }}</p>
+                        {% if block.settings.third_feature_message != blank %}
+                          <div class="pricing-card-feature-message-{{ section.id }}">
+                            <div class="pricing-card-feature-message-icon-{{ section.id }}">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 19.5C7.85775 19.5 4.5 16.1422 4.5 12C4.5 7.85775 7.85775 4.5 12 4.5C16.1422 4.5 19.5 7.85775 19.5 12C19.5 16.1422 16.1422 19.5 12 19.5ZM11.25 11.25V15.75H12.75V11.25H11.25ZM11.25 8.25V9.75H12.75V8.25H11.25Z" fill="currentColor"></path>
+                              </svg>
+                            </div>
+                            <p class="pricing-card-feature-message-text-{{ section.id }}">{{ block.settings.third_feature_message }}</p>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="pricing-card-feature-icon-{{ section.id }}">
+                        {% if block.settings.third_feature_value == "yes" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="{{ feature_check_color }}"></path>
+                          </svg>
+                        {% else %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 11.0002V13.0002H19V11.0002H5Z" fill="{{ feature_minus_color }}"></path>
+                          </svg>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% if features_divider_thickness > 0 %}
+                      <div class="pricing-card-features-divider-{{ section.id }}"></div>
+                    {% endif %}
+                  {% endif %}
+                  {% if block.settings.fourth_feature != blank %}
+                    <div class="pricing-card-feature-{{ section.id }}">
+                      <div class="pricing-card-feature-left-{{ section.id }}">
+                        <p class="pricing-card-feature-title-{{ section.id }}">{{ block.settings.fourth_feature }}</p>
+                        {% if block.settings.fourth_feature_message != blank %}
+                          <div class="pricing-card-feature-message-{{ section.id }}">
+                            <div class="pricing-card-feature-message-icon-{{ section.id }}">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 19.5C7.85775 19.5 4.5 16.1422 4.5 12C4.5 7.85775 7.85775 4.5 12 4.5C16.1422 4.5 19.5 7.85775 19.5 12C19.5 16.1422 16.1422 19.5 12 19.5ZM11.25 11.25V15.75H12.75V11.25H11.25ZM11.25 8.25V9.75H12.75V8.25H11.25Z" fill="currentColor"></path>
+                              </svg>
+                            </div>
+                            <p class="pricing-card-feature-message-text-{{ section.id }}">{{ block.settings.fourth_feature_message }}</p>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="pricing-card-feature-icon-{{ section.id }}">
+                        {% if block.settings.fourth_feature_value == "yes" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="{{ feature_check_color }}"></path>
+                          </svg>
+                        {% else %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 11.0002V13.0002H19V11.0002H5Z" fill="{{ feature_minus_color }}"></path>
+                          </svg>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% if features_divider_thickness > 0 %}
+                      <div class="pricing-card-features-divider-{{ section.id }}"></div>
+                    {% endif %}
+                  {% endif %}
+                  {% if block.settings.fifth_feature != blank %}
+                    <div class="pricing-card-feature-{{ section.id }}">
+                      <div class="pricing-card-feature-left-{{ section.id }}">
+                        <p class="pricing-card-feature-title-{{ section.id }}">{{ block.settings.fifth_feature }}</p>
+                        {% if block.settings.fifth_feature_message != blank %}
+                          <div class="pricing-card-feature-message-{{ section.id }}">
+                            <div class="pricing-card-feature-message-icon-{{ section.id }}">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 19.5C7.85775 19.5 4.5 16.1422 4.5 12C4.5 7.85775 7.85775 4.5 12 4.5C16.1422 4.5 19.5 7.85775 19.5 12C19.5 16.1422 16.1422 19.5 12 19.5ZM11.25 11.25V15.75H12.75V11.25H11.25ZM11.25 8.25V9.75H12.75V8.25H11.25Z" fill="currentColor"></path>
+                              </svg>
+                            </div>
+                            <p class="pricing-card-feature-message-text-{{ section.id }}">{{ block.settings.fifth_feature_message }}</p>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="pricing-card-feature-icon-{{ section.id }}">
+                        {% if block.settings.fifth_feature_value == "yes" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="{{ feature_check_color }}"></path>
+                          </svg>
+                        {% else %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 11.0002V13.0002H19V11.0002H5Z" fill="{{ feature_minus_color }}"></path>
+                          </svg>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% if features_divider_thickness > 0 %}
+                      <div class="pricing-card-features-divider-{{ section.id }}"></div>
+                    {% endif %}
+                  {% endif %}
+                </div>
+
+                {% if block.settings.button != blank %}
+                  <a href="{{ block.settings.button_url }}" class="pricing-card-button-{{ section.id }}">
+                     <p class="pricing-card-button-inner-{{ section.id }}">
+                      {{  block.settings.button }}
+                        {% if button_style == "non_outline_arrow" or button_style == "outline_arrow" %}
+                          <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M188.607 97.5657C188.432 97.5657 188.365 97.6788 188.27 97.8382C188.211 97.9378 188.141 98.0554 188.027 98.1748C188.027 98.4734 188.027 98.4734 187.731 98.7839L103.281 187.759C101.825 189.287 99.2085 189.287 97.7524 187.759C96.2963 186.23 96.2963 183.483 97.7524 181.954L175.492 100.013L6.88489 100.013C4.8486 100.013 3.09677 98.1739 3.09677 96.036C3.09677 93.8982 4.84866 92.059 6.88489 92.059L175.504 92.059L98.0465 9.80878C97.182 9.19968 96.8862 7.9815 96.8862 7.0619C96.8862 6.15422 97.1706 5.2346 98.0465 4.315C98.6267 3.40732 99.787 3.0968 100.663 3.0968C101.527 3.0968 102.403 3.39539 103.279 4.315L187.731 92.9796C187.731 93.1274 187.804 93.2021 187.877 93.2774C187.952 93.3543 188.027 93.4319 188.027 93.5887C188.046 93.6098 188.066 93.6308 188.085 93.6518C188.338 93.9267 188.584 94.1935 188.606 94.4689C188.607 94.482 188.607 94.4951 188.607 94.5083C188.903 94.8188 188.903 95.4279 188.903 96.037C188.903 96.6461 188.903 96.9566 188.607 97.5657ZM191.489 93.2767C191.79 93.8661 191.89 94.4204 191.934 94.7363C192.001 95.2226 192 95.7194 192 95.9856L192 96.037C192 96.0544 192 96.0729 192 96.0926C192 96.3523 192.001 96.8096 191.924 97.2931C191.828 97.8884 191.64 98.41 191.393 98.9184L190.546 100.663H190.212C190.127 100.759 190.038 100.852 189.988 100.905L189.974 100.92L105.527 189.891C102.85 192.701 98.1865 192.704 95.51 189.895C94.1476 188.464 93.5636 186.587 93.5636 184.857C93.5636 183.128 94.1468 181.252 95.5071 179.822M191.489 93.2767C191.316 92.7908 191.078 92.4357 190.938 92.2406C190.903 92.1912 190.866 92.142 190.828 92.0939V91.7408L105.522 2.17912C104.076 0.661813 102.397 0 100.663 0C99.3914 0 97.0569 0.401401 95.6212 2.37737C94.3151 3.83819 93.7895 5.45521 93.7895 7.0619C93.7895 8.26663 94.1183 10.6061 95.9608 12.111L168.333 88.9622L6.88489 88.9622C2.9981 88.9622 0 92.3316 0 96.036C0 99.7405 2.99801 103.11 6.88489 103.11L168.285 103.11" fill="black"></path>
+                            <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                          </svg>
+                        {% endif %}
+                      </p>
+                  </a>
+                {% endif %}
+              </div>
+              {% assign first_card_plan = false %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="pricing-toggles-{{ section.id }}">
+          {% assign first_plan = true %}
+          {% for block in section.blocks %}
+            {% if block.type == "plan" %}
+              <div class="pricing-toggle-{{ section.id }} {% if first_plan %}active{% endif %}" id="{{ block.id }}">
+                <div class="pricing-toggle-left-{{ section.id }}">
+                  {% if toggle_subtitle != blank %}
+                    <p class="pricing-toggle-subtitle-{{ section.id }}">{{ toggle_subtitle }}</p>
+                  {% endif %}
+                  {% if block.settings.title != blank or block.settings.badge != blank %}
+                    <div class="pricing-toggle-title-wrapper-{{ section.id }}">
+                      {% if block.settings.title != blank %}
+                        <p class="pricing-toggle-title-{{ section.id }}">{{ block.settings.title }}</p>
+                      {% endif %}
+                      {% if block.settings.badge != blank %}
+                        <p class="pricing-card-badge-{{ section.id }} pricing-card-badge-{{ block.id }}">{{ block.settings.badge }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="pricing-toggle-prices-{{ section.id }}">
+                  {% if block.settings.main_price != blank %}
+                    <p class="pricing-toggle-main-price-{{ section.id }}">{{ block.settings.main_price }}</p>
+                  {% endif %}
+                  <div class="pricing-toggle-prices-right-{{ section.id }}">
+                    {% if block.settings.old_price != blank %}
+                      <p class="pricing-toggle-old-price-{{ section.id }}">{{ block.settings.old_price }}</p>
+                    {% endif %}
+                    {% if price_text != blank %}
+                      <p class="pricing-toggle-price-text-{{ section.id }}">{{ price_text }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% assign first_plan = false %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+
+  function initPricingTable4() {
+    const toggles = document.querySelectorAll('.pricing-toggle-{{ section.id }}');
+    const cards = document.querySelectorAll('.pricing-card-{{ section.id }}');
+
+    if(toggles) {
+      toggles.forEach(toggle => {        
+        toggle.addEventListener('click', () => {
+          toggles.forEach(e => {
+            e.classList.remove('active');
+          })
+          cards.forEach(card => {
+            toggle.classList.add('active');
+            if(toggle.id == card.getAttribute('data-id')) {
+              card.classList.add('active');
+            } else {
+              card.classList.remove('active');
+            }
+          })
+        })
+      })
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initPricingTable4);
+  
+  if (Shopify.designMode) {
+     document.addEventListener('shopify:section:unload', initPricingTable4);
+     document.addEventListener('shopify:section:load', initPricingTable4);
+  }
+</script>
+
+
+
+{% schema %}
+  {
+    "name": "SS - Pricing table #4",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content settings"
+      },
+      {
+        "type": "text_alignment",
+        "id": "content_align",
+        "label": "Alignment",
+        "default": "center"
+      },
+      {
+        "type": "text_alignment",
+        "id": "content_align_mobile",
+        "label": "Alignment - mobile",
+        "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "Layout settings"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "cards_toggles",
+        "options": [
+          {
+            "label": "Cards - toggles",
+            "value": "cards_toggles"
+          },
+          {
+            "label": "Toggles - cards",
+            "value": "toggles_cards"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "layout_mobile",
+        "label": "Layout - mobile",
+        "default": "toggles_cards",
+        "options": [
+          {
+            "label": "Cards - toggles",
+            "value": "cards_toggles"
+          },
+          {
+            "label": "Toggles - cards",
+            "value": "toggles_cards"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "layout_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "layout_mt_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "layout_gap",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "layout_gap_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 32
+      },
+      {
+        "type": "header",
+        "content": "Card settings"
+      },
+      {
+        "type": "range",
+        "id": "card_padding_horizontal",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding horizontal",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "card_padding_horizontal_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding horizontal - mobile",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "card_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "card_padding_vertical_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical - mobile",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "card_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Card title settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_title_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "card_title_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "card_title_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "card_title_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "card_title_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Badge settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "badge_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "badge_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "badge_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "badge_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "badge_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "range",
+        "id": "badge_padding_horizontal",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding horizontal",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "badge_padding_horizontal_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding horizontal - mobile",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "badge_padding_vertical",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "badge_padding_vertical_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical - mobile",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "badge_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "badge_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 1
+      },
+      {
+        "type": "header",
+        "content": "Card text settings"
+      },
+      {
+        "type": "text",
+        "id": "card_text",
+        "label": "Text",
+        "default": "Pause or cancel at anytime"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_text_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "card_text_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "card_text_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "card_text_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "card_text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Features settings"
+      },
+      {
+        "type": "range",
+        "id": "features_mt",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "features_mt_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "features_gap",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "features_gap_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "features_divider_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Divider thickness",
+        "default": 1
+      },
+      {
+        "type": "header",
+        "content": "Feature title settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "feature_title_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "feature_title_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "feature_title_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "feature_title_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "feature_title_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Feature info settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "feature_message_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "feature_message_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "feature_message_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "feature_message_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "feature_message_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Button settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "button_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "button_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "button_size",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "button_size_mobile",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "button_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "button_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "button_padding_vertical_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical - mobile",
+        "default": 12
+      },
+      {
+         "type": "range",
+         "id": "button_padding_horizontal",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Padding horizontal",
+         "default": 20
+      },
+      {
+         "type": "range",
+         "id": "button_padding_horizontal_mobile",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Padding horizontal - mobile",
+         "default": 20
+      },
+      {
+         "type": "range",
+         "id": "button_radius",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Roundness",
+         "default": 0
+      },
+      {
+         "type": "range",
+         "id": "button_border_thickness",
+         "min": 0,
+         "max": 10,
+         "step": 1,
+         "unit": "px",
+         "label": "Border thickness",
+         "default": 0
+      },
+      {
+         "type": "range",
+         "id": "button_mt",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Margin top",
+         "default": 32
+      },
+      {
+         "type": "range",
+         "id": "button_mt_mobile",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Margin top - mobile",
+         "default": 32
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button style",
+        "default": "non_outline",
+        "options": [
+          {
+            "label": "Link",
+            "value": "link"
+          },
+          {
+            "label": "Non-outline",
+            "value": "non_outline"
+          },
+          {
+            "label": "Non-outline & arrow",
+            "value": "non_outline_arrow"
+          },
+          {
+            "label": "Outline",
+            "value": "outline"
+          },
+          {
+            "label": "Outline & arrow",
+            "value": "outline_arrow"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Toggle cards settings"
+      },
+       {
+        "type": "range",
+        "id": "toggle_cards_gap",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "toggle_cards_gap_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 8
+      },
+      {
+        "type": "header",
+        "content": "Toggle card settings"
+      },
+      {
+        "type": "range",
+        "id": "toggle_card_padding_horizontal",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding horizontal",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "toggle_card_padding_horizontal_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding horizontal - mobile",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "toggle_card_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "toggle_card_padding_vertical_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical - mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "toggle_card_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "toggle_card_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 1
+      },
+      {
+        "type": "header",
+        "content": "Toggle card subtitle settings"
+      },
+      {
+        "type": "text",
+        "id": "toggle_subtitle",
+        "label": "Subtitle",
+        "default": "PLAN"
+      },
+      {
+        "type": "checkbox",
+        "id": "toggle_subtitle_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "toggle_subtitle_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "toggle_subtitle_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "toggle_subtitle_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "toggle_subtitle_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Toggle card title settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "toggle_title_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "toggle_title_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "toggle_title_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "toggle_title_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "toggle_title_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "range",
+        "id": "toggle_title_mt",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "toggle_title_mt_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 4
+      },
+      {
+        "type": "header",
+        "content": "Toggle price settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "toggle_main_price_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "toggle_main_price_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "toggle_main_price_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "toggle_main_price_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "toggle_main_price_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Toggle compare-at price settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "toggle_old_price_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "toggle_old_price_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "toggle_old_price_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "toggle_old_price_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "toggle_old_price_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Toggle price text settings"
+      },
+      {
+        "type": "text",
+        "id": "price_text",
+        "label": "Text",
+        "default": "/month"
+      },
+      {
+        "type": "checkbox",
+        "id": "price_text_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "price_text_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "price_text_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "price_text_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "price_text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Card colors"
+      },
+      {
+        "type": "color",
+        "label": "Title",
+        "id": "card_title_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Text",
+        "id": "card_text_color",
+        "default": "#4D4D4D"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "card_bg_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "card_border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Features colors"
+      },
+      {
+        "type": "color",
+        "label": "Title",
+        "id": "feature_title_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Divider",
+        "id": "features_divider_color",
+          "default": "#e6e6e6"
+      },
+      {
+        "type": "color",
+        "label": "Check",
+        "id": "feature_check_color",
+        "default": "#3c9075"
+      },
+      {
+        "type": "color",
+        "label": "Minus",
+        "id": "feature_minus_color",
+        "default": "#aa3c3c"
+      },
+      {
+        "type": "header",
+        "content": "Feature info colors"
+      },
+      {
+        "type": "color",
+        "label": "Text",
+        "id": "feature_message_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Icon",
+        "id": "feature_message_icon_color",
+        "default": "#D4D4D4"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "feature_message_bg_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "Button colors"
+      },
+      {
+        "type": "color",
+        "label": "Text",
+        "id": "button_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "label": "Hover text",
+        "id": "button_hover_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "button_bg_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Background hover",
+        "id": "button_bg_hover_color",
+        "default": "#4D4D4D"
+      },
+      {
+        "type": "color",
+        "label": "Button border",
+        "id": "button_border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Border hover",
+        "id": "button_border_hover_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Toggle card colors"
+      },
+      {
+        "type": "color",
+        "label": "Subtitle",
+        "id": "toggle_subtitle_color",
+        "default": "#737373"
+      },
+      {
+        "type": "color",
+        "label": "Title",
+        "id": "toggle_title_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "toggle_card_bg_color"
+      },
+      {
+        "type": "color",
+        "label": "Background hover",
+        "id": "toggle_card_bg_hover_color",
+        "default": "#f2eeee"
+      },
+      {
+        "type": "color",
+        "label": "Background active",
+        "id": "toggle_card_bg_active_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "toggle_card_border_color",
+        "default": "#e6e6e6"
+      },
+      {
+        "type": "color",
+        "label": "Border hover",
+        "id": "toggle_card_border_hover_color",
+        "default": "#f2eeee"
+      },
+      {
+        "type": "color",
+        "label": "Border active",
+        "id": "toggle_card_border_active_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "Toggle price colors"
+      },
+      {
+        "type": "color",
+        "label": "Price",
+        "id": "toggle_main_price_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Compare-at price",
+        "id": "toggle_old_price_color",
+        "default": "#aa3c3c"
+      },
+      {
+        "type": "color",
+        "label": "Text",
+        "id": "price_text_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Section colors"
+      },
+      {
+        "type": "color",
+        "label": "Section background",
+        "id": "background_color",
+        "default": "#F8F6F6"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Section background gradient",
+        "info": "Remove gradient to replace with solid colors"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Section margin (outside)"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin bottom",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Margin sides",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Margin sides mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section padding (inside)"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 36
+      },
+      {
+         "type": "range",
+         "id": "padding_bottom",
+         "min": 0,
+         "max": 100,
+         "step": 4,
+         "unit": "px",
+         "label": "Padding bottom",
+         "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Padding sides",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Padding sides mobile",
+        "default": 1.5
+      },
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "min": 800,
+        "max": 2000,
+        "step": 100,
+        "unit": "px",
+        "label": "Section content width",
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "border_thickness",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Section roundness",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "subheading",
+        "name": "Subheading",
+        "settings": [    
+          {
+            "type": "richtext",
+            "id": "sub_heading",
+            "label": "Subheading",
+            "default": "<p>PRICING TABLE #4</p>"
+          },
+          {
+            "type": "checkbox",
+            "id": "sub_heading_custom",
+            "label": "Use custom font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "sub_heading_font",
+            "label": "Font family",
+            "default": "josefin_sans_n4"
+          },
+          {
+            "type": "range",
+            "id": "sub_heading_size",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "sub_heading_size_mobile",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size - mobile",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "sub_heading_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Line height",
+            "default": 130
+          },          
+          {
+            "type": "range",
+            "id": "sub_heading_mt",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "sub_heading_mt_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Margin top - mobile",
+            "default": 0
+          },         
+          {
+            "type": "color",
+            "label": "Color",
+            "id": "sub_heading_color",
+            "default": "#4D4D4D"
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "name": "Heading",
+        "settings": [    
+          {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading",
+            "default": "<h2>Pricing made <strong>simple</strong></h2>",
+            "info": "Use bold style for the accent color"
+          },
+          {
+            "type": "checkbox",
+            "id": "heading_custom",
+            "label": "Use custom font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "heading_font",
+            "label": "Font family",
+            "default": "josefin_sans_n4"
+          },
+          {
+            "type": "range",
+            "id": "heading_size",
+            "min": 0,
+            "max": 72,
+            "step": 2,
+            "unit": "px",
+            "label": "Font size",
+            "default": 48
+          },
+          {
+            "type": "range",
+            "id": "heading_size_mobile",
+            "min": 0,
+            "max": 72,
+            "step": 2,
+            "unit": "px",
+            "label": "Font size - mobile",
+            "default": 36
+          },
+          {
+            "type": "range",
+            "id": "heading_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Line height",
+            "default": 130
+          },
+          {
+            "type": "range",
+            "id": "heading_mt",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "heading_mt_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Margin top - mobile",
+            "default": 12
+          },
+          {
+            "type": "header",
+            "content": "Colors"
+          },
+          {
+            "type": "color",
+            "label": "Primary",
+            "id": "heading_color",
+            "default": "#000000"
+          },
+          {
+            "type": "color",
+            "label": "Accent",
+            "id": "heading_other_color",
+            "default": "#334FB4"
+          }
+        ]
+      },   
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [    
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Simple pricing to level up your company</p>"
+          },
+          {
+            "type": "checkbox",
+            "id": "text_custom",
+            "label": "Use custom font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "text_font",
+            "label": "Font family",
+            "default": "josefin_sans_n4"
+          },
+          {
+            "type": "range",
+            "id": "text_size",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "text_size_mobile",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size - mobile",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "text_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Line height",
+            "default": 150
+          },          
+          {
+            "type": "range",
+            "id": "text_max_width",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "%",
+            "label": "Max width",
+            "default": 80
+          },
+          {
+            "type": "range",
+            "id": "text_max_width_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "%",
+            "label": "Max width - mobile",
+            "default": 80
+          },
+          {
+            "type": "range",
+            "id": "text_mt",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 12
+          },
+          {
+            "type": "range",
+            "id": "text_mt_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Margin top - mobile",
+            "default": 12
+          },         
+          {
+            "type": "color",
+            "label": "Color",
+            "id": "text_color",
+            "default": "#4D4D4D"
+          }
+        ]
+      },
+      {
+        "type": "plan",
+        "name": "Pricing plan",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Title",
+            "id": "title",
+            "default": "Standard"
+          },
+          {
+            "type": "text",
+            "label": "Badge",
+            "id": "badge",
+            "default": "For Starter"
+          },
+          {
+            "type": "text",
+            "label": "Price",
+            "id": "main_price",
+            "default": "$9.99"
+          },
+          {
+            "type": "text",
+            "label": "Compare-at price",
+            "id": "old_price"
+          },
+          {
+            "type": "text",
+            "label": "First feature title",
+            "id": "first_feature",
+            "default": "Feature one"
+          },
+          {
+            "type": "select",
+            "id": "first_feature_value",
+            "label": "First feature value",
+            "default": "yes",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes"
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "First feature text",
+            "id": "first_feature_message",
+            "default": "Add your custom message here"
+          },
+          {
+            "type": "text",
+            "label": "Second feature title",
+            "id": "second_feature",
+            "default": "Feature two"
+          },
+          {
+            "type": "select",
+            "id": "second_feature_value",
+            "label": "Second feature value",
+            "default": "yes",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes"
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "Second feature text",
+            "id": "second_feature_message",
+            "default": "Add your custom message here"
+          },
+          {
+            "type": "text",
+            "label": "Third feature title",
+            "id": "third_feature",
+            "default": "Feature three"
+          },
+          {
+            "type": "select",
+            "id": "third_feature_value",
+            "label": "Third feature value",
+            "default": "yes",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes"
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "Third feature text",
+            "id": "third_feature_message",
+            "default": "Add your custom message here"
+          },
+          {
+            "type": "text",
+            "label": "Fourth feature title",
+            "id": "fourth_feature",
+            "default": "Feature four"
+          },
+          {
+            "type": "select",
+            "id": "fourth_feature_value",
+            "label": "Fourth feature value",
+            "default": "no",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes"
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "Fourth feature text",
+            "id": "fourth_feature_message",
+            "default": "Add your custom message here"
+          },
+          {
+            "type": "text",
+            "label": "Fifth feature title",
+            "id": "fifth_feature",
+            "default": "Feature five"
+          },
+          {
+            "type": "select",
+            "id": "fifth_feature_value",
+            "label": "Fifth feature value",
+            "default": "no",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes"
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "Fifth feature text",
+            "id": "fifth_feature_message",
+            "default": "Add your custom message here"
+          },
+          {
+            "type": "text",
+            "label": "Button label",
+            "id": "button",
+            "info": "Leave the label blank to hide the button.",
+            "default": "Get started"
+          },
+          {
+            "type": "url",
+            "label": "Button URL",
+            "id": "button_url"
+          },
+          {
+            "type": "header",
+            "content": "Colors"
+          },
+          {
+            "type": "color",
+            "label": "Text",
+            "id": "badge_color",
+            "default": "#27497c"
+          },
+          {
+            "type": "color",
+            "label": "Background",
+            "id": "badge_bg_color",
+            "default": "#f3f6fc"
+          },
+          {
+            "type": "color",
+            "label": "Border",
+            "id": "badge_border_color",
+            "default": "#e8eef7"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "SS - Pricing table #4",
+        "blocks": [
+           {
+            "type": "subheading"
+          },
+          {
+            "type": "heading"
+          },
+          {
+            "type": "text"
+          },
+          {
+            "type": "plan"
+          },
+          {
+            "type": "plan",
+            "settings": {
+              "title": "Professional",
+              "badge": "Most Popular",
+              "badge_bg_color": "#f6eaea",
+              "badge_border_color": "#eed8d8",
+              "badge_color": "#761e1e",
+              "main_price": "$14.99",
+              "old_price": "$19.99",
+              "fifth_feature_value": "yes"
+            }
+          },
+          {
+            "type": "plan",
+            "settings": {
+              "title": "Enterprise",
+              "badge": "Book a call",
+              "badge_bg_color": "#fafafa",
+              "badge_border_color": "#f2eeee",
+              "badge_color": "#404040",
+              "main_price": "$24.99",
+              "old_price": "$29.99",
+              "fourth_feature_value": "yes",
+              "fifth_feature_value": "yes"
+            }
+          },
+        ]
+      }
+    ]
+  }
+{% endschema %}

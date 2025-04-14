@@ -1,0 +1,307 @@
+<div class="call_wrapper">
+    <div class="call_out">
+        <div class="call_icon">
+            <img src="{{ section.settings.header_icon | img_url: 'medium' }}" alt="">
+        </div>
+        <div class="call_content">
+            <p class="call_content-title">{{ section.settings.header }} <span class="call_content-title_gradient">{{ section.settings.header_gradient }}</span></p>
+            <p class="call_content-subheader">{{ section.settings.subheader }}</p>
+            <a class="call_content-button" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+        </div>
+    </div>
+</div>
+
+<style>
+  	
+    .call_wrapper .button, .call_wrapper .icon, .call_wrapper .header-gradient {
+        background: linear-gradient(to right, {{section.settings.gradient_color_1}} 0%,{{section.settings.gradient_color_2}} 50%, {{section.settings.gradient_color_3}});
+    }
+  	.call_icon img {
+       	max-height: 60px;
+  		max-width: 60px;
+  	}
+    .call_wrapper {
+        max-width: 125rem;
+        margin: 150px auto 100px auto;
+      	padding: 0 5rem;
+    }
+    .call_out {
+        position: relative;
+        border-radius: 59px 59px 12px 12px;
+        background: linear-gradient(119.19deg, {{section.settings.body_gradient_color_1}} -3.63%, {{section.settings.body_gradient_color_2}} -3.62%, {{section.settings.body_gradient_color_3}} 27.59%, {{section.settings.body_gradient_color_4}} 54.32%, {{section.settings.body_gradient_color_5}} 71.73%, {{section.settings.body_gradient_color_6}} 99.72%);
+    }
+    .call_icon {
+        background: linear-gradient(to right, {{section.settings.gradient_color_1}} 0%,{{section.settings.gradient_color_2}} 50%, {{section.settings.gradient_color_3}});
+        border-radius: 50%;
+        width: 94px;
+        height: 94px;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .call_content {
+        padding: 50px 50px;
+        text-align: center;
+    }
+    .call_content-title {
+          font-weight:900;
+        font-family: "Recoleta-Bold";
+        font-size: {{ section.settings.header_font_size }}px;
+        color: {{ section.settings.header_color }};
+        line-height: 1.3;
+      	margin-top:40px;
+      	margin-bottom:40px;
+    }
+    .call_content-title_gradient {
+        background: linear-gradient(to right, {{section.settings.gradient_color_1}} 0%,{{section.settings.gradient_color_2}} 50%, {{section.settings.gradient_color_3}});
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .call_content-subheader {
+        font-family: 'Red Hat Text';
+        font-size: {{ section.settings.subheader_font_size }}px;
+        color: {{ section.settings.subheader_color }};
+    }
+    .call_content-button { 
+        border-radius: 15px;
+        margin: 40px auto 0 auto;
+        width: 100%;
+        max-width: 188px;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to right, {{section.settings.gradient_color_1}} 0%,{{section.settings.gradient_color_2}} 50%, {{section.settings.gradient_color_3}});
+        font-family: 'Red Hat Text';
+        font-size: {{ section.settings.button_font_size }}px;
+        color: {{ section.settings.subheader_color }};
+        text-decoration: none;
+    }
+    @media (max-width: 1024px) {
+      
+      
+        .call_wrapper {
+            padding: 0 1.5rem;
+          	margin: 100px auto 70px auto;
+        }
+    }
+    @media (max-width: 767px) {
+      .call_content {
+        padding: 50px 30px;
+      }
+      .call_wrapper {
+            padding: 0 1.5rem;
+          	margin: 100px auto 70px auto;
+        }
+        .call_content-title {
+            margin-top: 10px;
+            font-size: {{ section.settings.header_mob_font_size }}px;
+            line-height: 1.3;
+        }
+        .call_content-subheader {
+          font-size: {{section.settings.subheader_mob_font_size}}px;
+        }
+        .call_content-button {
+        }
+        .call_icon {
+            top: -30px;
+            width: 60px;
+            height: 60px;
+        }
+        .call_icon img {
+            max-width: 40px;
+            max-height: 40px;
+        }
+    }
+</style>
+
+
+{% schema %}
+{
+  "name": "Glow Call To Action",
+  "tag": "section",
+  "class": "call-out-section",
+  "settings": [
+    {
+        "type": "header",
+        "content": "Header"
+    },
+    {
+        "type": "image_picker",
+        "id": "header_icon",
+        "label": "Header icon"
+    },
+    {
+        "type": "html",
+        "id": "header",
+        "label": "Without gradient header",
+        "default": "End of season sale ends soon.<br> Hurry and"
+    },
+    {
+        "type": "text",
+        "id": "header_gradient",
+        "label": "Gradient header part",
+        "default": "save 50%"
+    },
+    {
+        "type": "color",
+        "id": "header_color",
+        "label": "Header Font color",
+        "default": "#FFFFFF"
+    },
+    {
+        "type": "range",
+        "id": "header_font_size",
+        "min": 12,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Header Font Size",
+        "default": 70
+    },
+    {
+        "type": "range",
+        "id": "header_mob_font_size",
+        "min": 12,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Header Font Size (Mobile device)",
+        "default": 26
+    },
+    {
+        "type": "header",
+        "content": "Subheader"
+    },
+    {
+        "type": "textarea",
+        "id": "subheader",
+        "label": "Subheader text",
+        "default": "The Galaxy projecter is selling out fast so be quick. Next batch will not arrive before January 2022 due to covid delays."
+    },
+    {
+        "type": "color",
+        "id": "subheader_color",
+        "label": "Description Font color",
+        "default": "#FFFFFF"
+    },
+    {
+        "type": "range",
+        "min": 12,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "id": "subheader_font_size",
+        "label": "Description Font Size",
+        "default": 18
+    },
+    {
+        "type": "range",
+        "id": "subheader_mob_font_size",
+        "min": 10,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Description Font Size (Mobile device)",
+        "default": 14
+    },
+    {
+        "type": "header",
+        "content": "Button"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "SHOP NOW"
+    },
+    {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url",
+        "default": "/collections/all"
+    },
+    {
+        "type": "range",
+        "min": 12,
+        "max": 120,
+        "step": 2,
+        "unit": "px",
+        "id": "button_font_size",
+        "label": "Button Font Size",
+        "default": 18
+    },
+    {
+        "type": "header",
+        "content": "Gradient settings"
+    },
+    {
+        "type": "color",
+        "id": "gradient_color_1",
+        "label": "Gradient color 1",
+        "default": "#4222DE"
+    },
+    {
+        "type": "color",
+        "id": "gradient_color_2",
+        "label": "Gradient color 2",
+        "default": "#659BFF"
+    },
+    {
+        "type": "color",
+        "id": "gradient_color_3",
+        "label": "Gradient color 3",
+        "default": "#7FF6E8"
+    },
+    {
+        "type": "header",
+        "content": "Body Gradient settings"
+    },
+    {
+        "type": "color",
+        "id": "body_gradient_color_1",
+        "label": "Gradient color 1",
+        "default": "#0B1128"
+    },
+    {
+        "type": "color",
+        "id": "body_gradient_color_2",
+        "label": "Gradient color 2",
+        "default": "#212560"
+    },
+    {
+        "type": "color",
+        "id": "body_gradient_color_3",
+        "label": "Gradient color 3",
+        "default": "#12183C"
+    },
+    {
+        "type": "color",
+        "id": "body_gradient_color_4",
+        "label": "Gradient color 4",
+        "default": "#0B1128"
+    },
+    {
+        "type": "color",
+        "id": "body_gradient_color_5",
+        "label": "Gradient color 5",
+        "default": "#0B1128"
+    },
+    {
+        "type": "color",
+        "id": "body_gradient_color_6",
+        "label": "Gradient color 6",
+        "default": "#12173D"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SS - Glow Call Out"
+    }
+  ]
+}
+{% endschema %}

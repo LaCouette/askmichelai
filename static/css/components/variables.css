@@ -1,0 +1,49 @@
+/* Variables and custom properties */
+:root {
+  /* Couleurs principales */
+  --bg-primary: #0a0a0c;
+  --bg-secondary: #111114;
+  --bg-tertiary: #18181b;
+  --border-subtle: #27272a;
+  
+  /* Texte */
+  --text-primary: #f2f2f2;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  
+  /* Accent - Couleurs Shopify */
+  --accent-primary: #5c6ac4;
+  --accent-secondary: #50b83c;
+  --accent-gradient: linear-gradient(135deg, #008060, #50b83c);
+  --accent-glow: rgba(80, 184, 60, 0.2);
+  
+  /* Utilitaires */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.24);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.28);
+  
+  /* Espacements */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Arrondis */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+  
+  /* Animations */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Background Patterns */
+  --grid-color-1: rgba(92, 106, 196, 0.1);
+  --grid-color-2: rgba(80, 184, 60, 0.08);
+  --grid-accent: rgba(80, 184, 60, 0.25);
+} 

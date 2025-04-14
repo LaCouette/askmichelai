@@ -1,0 +1,1681 @@
+{% comment %}
+---------------------------------------------------------
+Copyright © 2023 Section Store. All rights reserved.
+Unauthorized copying, modification, distribution, or use
+of this code or any portion of it, is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact daniel@section.store
+---------------------------------------------------------
+{% endcomment %}
+
+{%- liquid 
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+  assign lazy = section.settings.lazy
+
+  assign guide_position = section.settings.guide_position
+
+  assign toggle = section.settings.toggle
+  assign toggle_size = section.settings.toggle_size
+  assign toggle_size_mobile = section.settings.toggle_size_mobile
+  assign toggle_color = section.settings.toggle_color
+  assign toggle_hover_color = section.settings.toggle_hover_color
+  assign toggle_custom = section.settings.toggle_custom
+  assign toggle_font = section.settings.toggle_font
+  assign toggle_height = section.settings.toggle_height
+  assign toggle_align = section.settings.toggle_align
+  assign toggle_align_mobile = section.settings.toggle_align_mobile
+
+  assign icon = section.settings.icon
+  assign icon_size_mobile = section.settings.icon_size_mobile
+  assign icon_size = section.settings.icon_size
+  assign hide_icon = section.settings.hide_icon
+
+  assign modal_padding_horizontal = section.settings.modal_padding_horizontal
+  assign modal_padding_horizontal_mobile = section.settings.modal_padding_horizontal_mobile
+  assign modal_padding_vertical = section.settings.modal_padding_vertical
+  assign modal_padding_vertical_mobile = section.settings.modal_padding_vertical_mobile
+  assign modal_radius = section.settings.modal_radius
+  assign modal_border_thickness = section.settings.modal_border_thickness
+  assign modal_width = section.settings.modal_width
+  assign modal_width_mobile = section.settings.modal_width_mobile
+  assign modal_overlay = section.settings.modal_overlay
+  assign modal_overlay_color = section.settings.modal_overlay_color
+  assign modal_border_color = section.settings.modal_border_color
+  assign modal_bg_color = section.settings.modal_bg_color
+
+  assign close_icon_size = section.settings.close_icon_size
+  assign close_icon_size_mobile = section.settings.close_icon_size_mobile
+  assign close_icon_color = section.settings.close_icon_color
+
+  assign body_gap = section.settings.body_gap
+  assign body_gap_mobile = section.settings.body_gap_mobile
+  assign body_mt = section.settings.body_mt
+  assign body_mt_mobile = section.settings.body_mt_mobile
+
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align = section.settings.heading_align
+  assign heading_align_mobile = section.settings.heading_align_mobile
+
+  assign title = section.settings.title
+  assign title_size = section.settings.title_size
+  assign title_size_mobile = section.settings.title_size_mobile
+  assign title_color = section.settings.title_color
+  assign title_custom = section.settings.title_custom
+  assign title_font = section.settings.title_font
+  assign title_height = section.settings.title_height
+  assign title_mt = section.settings.title_mt
+  assign title_mt_mobile = section.settings.title_mt_mobile
+
+  assign switches_border_color = section.settings.switches_border_color
+  assign switch_size = section.settings.switch_size
+  assign switch_size_mobile = section.settings.switch_size_mobile
+  assign switch_color = section.settings.switch_color
+  assign switch_active_color = section.settings.switch_active_color
+  assign switch_bg_active_color = section.settings.switch_bg_active_color
+  assign switch_custom = section.settings.switch_custom
+  assign switch_font = section.settings.switch_font
+  assign switch_height = section.settings.switch_height
+  assign switch_radius = section.settings.switch_radius
+
+  assign text = section.settings.text
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_color = section.settings.text_color
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_height = section.settings.text_height
+  assign text_align = section.settings.text_align
+  assign text_align_mobile = section.settings.text_align_mobile
+  assign text_mt = section.settings.text_mt
+  assign text_mt_mobile = section.settings.text_mt_mobile
+
+  assign modal_image = section.settings.modal_image
+  assign modal_image_radius = section.settings.modal_image_radius
+  assign hide_modal_image = section.settings.hide_modal_image
+
+  assign use_scrollbar = section.settings.use_scrollbar
+  
+-%}
+
+{%- style -%}
+
+  {{ toggle_font | font_face: font_display: 'swap' }}
+  {{ heading_font | font_face: font_display: 'swap' }}
+  {{ title_font | font_face: font_display: 'swap' }}
+  {{ switch_font | font_face: font_display: 'swap' }}
+  {{ text_font | font_face: font_display: 'swap' }}
+  
+  .section-{{ section.id }} {
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+    margin-top: {{ margin_top | times: 0.75 | round: 0 }}px !important;
+    margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px !important;
+  }
+  
+  .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: {{ padding_horizontal_mobile }}rem;
+    padding-right: {{ padding_horizontal_mobile }}rem;
+    position: relative;
+  }
+
+  .size-toggle-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    max-width: fit-content;
+    cursor: pointer;
+  }
+
+  .size-toggle-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ toggle_size_mobile }}px;
+    color: {{ toggle_color }};
+    line-height: {{ toggle_height }}%;
+    text-transform: unset;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: all 0.25s ease 0s;
+  }
+
+  .size-toggle-{{ section.id }}:hover * {
+    transition: all 0.25s ease 0s;
+    color: {{ toggle_hover_color }};
+  }
+
+  .size-toggle-icon-{{ section.id }} {
+    flex: 0 0 {{ icon_size_mobile }}px;
+  }
+
+  .size-toggle-icon-{{ section.id }} img,
+  .size-toggle-icon-{{ section.id }} svg {
+    display: block;
+    width: {{ icon_size_mobile }}px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .size-toggle-icon-{{ section.id }} svg path {
+    transition: all 0.25s ease 0s;
+    stroke: {{ toggle_color }};
+  }
+
+  .size-toggle-{{ section.id }}:hover .size-toggle-icon-{{ section.id }} svg path {
+    transition: all 0.25s ease 0s;
+    stroke: {{ toggle_hover_color }};
+  }
+
+  .size-modal-{{ section.id }} {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+    pointer-events: none;
+    background: {{ modal_overlay_color | hex_to_rgba: modal_overlay }};
+    padding: 10px;
+  }
+
+  .size-modal-{{ section.id }}.active {
+    opacity: 1;
+    z-index: 100;
+    pointer-events: all;
+    transition: all 250ms ease-in 0s;
+  }
+
+  .size-modal-inner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    max-height: 96vh;
+    height: 100%;
+    padding: {{ modal_padding_vertical_mobile }}px {{ modal_padding_horizontal_mobile }}px;
+    border: {{ modal_border_thickness }}px solid {{ modal_border_color }};
+    background-color: {{ modal_bg_color }};
+    border-radius: {{ modal_radius }}px;
+    max-width: {{ modal_width_mobile }}%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .size-modal-body-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ body_gap_mobile }}px;
+    margin-top: {{ body_mt_mobile }}px;
+  }
+
+  .size-modal-image-{{ section.id }} {
+    flex: 1 0;
+    border-radius: {{ modal_image_radius }}px;
+    overflow: hidden;
+  }
+
+  .size-modal-image-{{ section.id }} img,
+  .size-modal-image-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .size-modal-image-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .size-modal-heading-{{ section.id }} {
+    text-align: {{ heading_align_mobile }};
+  }
+
+  .size-modal-heading-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+  }
+
+  .size-modal-content-{{ section.id }} {
+    flex: 1 0;
+    width: calc(100% + {{ modal_padding_horizontal_mobile }}px);
+  }
+
+  .size-modal-content-top-{{ section.id }} {
+    margin-top: {{ title_mt_mobile }}px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .size-modal-title-{{ section.id }} {
+    margin: 0px;
+    font-size: {{ title_size_mobile }}px;
+    color: {{ title_color }};
+    line-height: {{ title_height }}%;
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 700
+  }
+
+  .size-modal-text-{{ section.id }} {
+    margin-top: {{ text_mt_mobile }}px;
+    text-align: {{ text_align_mobile }};
+  }
+
+  .size-modal-table-{{ section.id }} {
+    text-align: {{ text_align_mobile }};
+    min-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-left: -{{ modal_padding_horizontal_mobile }}px;
+    padding-left: {{ modal_padding_horizontal_mobile }}px;
+    padding-right: {{ modal_padding_horizontal_mobile }}px;
+    scrollbar-width: thin;
+  }
+
+  .size-modal-table-{{ section.id }}::-webkit-scrollbar {
+    background-color: #f9f9fd;
+  }
+
+  .size-modal-table-{{ section.id }}::-webkit-scrollbar-thumb {
+    background-color: #000000;
+  }
+
+  .size-modal-table-{{ section.id }} table {
+    border: 1px solid rgba(var(--color-foreground),.2);
+    box-shadow: none;
+  }
+
+  .size-modal-text-{{ section.id }} *,
+  .size-modal-table-{{ section.id }} * {
+    font-size: {{ text_size_mobile }}px;
+    color: {{ text_color }};
+    line-height: {{ text_height }}%;
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .size-modal-text-{{ section.id }} *:first-child,
+  .size-modal-table-{{ section.id }} *:first-child {
+    margin-top: 0px;
+  }
+
+  .size-modal-text-{{ section.id }} ul,
+  .size-modal-table-{{ section.id }} ul {
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    unicode-bidi: isolate;
+  }
+
+  .size-modal-close-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20px !important;
+    right: 10px !important;
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 99;
+    position: absolute;
+    margin: 0px;
+  }
+
+  .size-modal-close-{{ section.id }} svg {
+    width: {{ close_icon_size_mobile }}px;
+  }
+
+  .size-modal-close-{{ section.id }} svg path {
+    fill: {{ close_icon_color }};
+  }
+
+  .size-modal-toggles-{{ section.id }} {
+    max-width: fit-content;
+    padding: 5px;
+    border-radius: {{ switch_radius }}px;
+    border: 1px solid {{ switches_border_color }};
+    min-width: 150px;
+    cursor: pointer;
+  }
+
+  .size-modal-toggles-inner-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: relative;
+    width: 100%;
+  }
+
+  .size-modal-toggle-{{ section.id }} {
+    flex: 1 0;
+    display: block;
+    padding: 10px;
+    font-size: {{ switch_size_mobile }}px;
+    color: {{ switch_color }};
+    line-height: {{ switch_height }}%;
+    text-transform: unset;
+    transition: all 0.25s ease 0s;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .size-modal-toggles-{{ section.id }} .size-modal-toggle-{{ section.id }}:first-child {
+    transition: all 0.25s ease 0s;
+    color: {{ switch_active_color }}; 
+  }
+
+  .size-modal-toggles-{{ section.id }}.active .size-modal-toggle-{{ section.id }}:first-child {
+    transition: all 0.25s ease 0s;
+    color: {{ switch_color }}; 
+  }
+
+  .size-modal-toggles-{{ section.id }}.active .size-modal-toggle-{{ section.id }}:nth-child(2) {
+    transition: all 0.25s ease 0s;
+    color: {{ switch_active_color }}; 
+  }
+
+  .size-modal-toggle-active-{{ section.id }} {
+    background-color: {{ switch_bg_active_color }};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% / {{ section.blocks.size }});
+    height: 100%;
+    border-radius: {{ switch_radius }}px;
+    z-index: 1;
+    transition: all 0.25s ease 0s;
+  }
+
+  .size-modal-toggles-{{ section.id }}.active .size-modal-toggle-active-{{ section.id }} {
+    left: 50%;
+    transition: all 0.25s ease 0s;
+  }
+
+  .size-modal-table-{{ section.id }} {
+    display: none;
+  }
+
+  .size-modal-tables-{{ section.id }} .size-modal-table-{{ section.id }}:first-child {
+    display: block; 
+  }
+
+  .size-modal-tables-{{ section.id }}.active .size-modal-table-{{ section.id }}:first-child {
+    display: none;
+  }
+
+  .size-modal-tables-{{ section.id }}.active .size-modal-table-{{ section.id }}:last-child {
+    display: block; 
+  }
+
+  .size-modal-content-{{ section.id }} {
+    order: 2;
+  }
+
+  .size-modal-image-{{ section.id }} {
+    order: 1;
+  }
+  
+  @media(min-width: 1024px) {
+
+    .section-{{ section.id }} {
+      margin-top: {{ margin_top }}px !important;
+      margin-bottom: {{ margin_bottom }}px !important;
+    }
+    
+    .section-{{ section.id }}-settings {
+      padding: 0 5rem;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_horizontal }}rem;
+      padding-right: {{ padding_horizontal }}rem;
+    }
+
+    .size-toggle-{{ section.id }} * {
+      font-size: {{ toggle_size }}px;
+    }
+
+    .size-toggle-icon-{{ section.id }} {
+      flex: 0 0 {{ icon_size }}px;
+    }
+
+    .size-modal-{{ section.id }} {
+      padding: 80px;
+    }
+
+    .size-modal-inner-{{ section.id }} {
+      max-width: {{ modal_width }}%;
+      padding: {{ modal_padding_vertical }}px {{ modal_padding_horizontal }}px;
+    }
+
+    .size-modal-heading-{{ section.id }} {
+      text-align: {{ heading_align }};
+    }
+  
+    .size-modal-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
+    .size-modal-body-{{ section.id }} {
+      gap: {{ body_gap }}px;
+      margin-top: {{ body_mt }}px;
+      flex-direction: row;
+    }
+
+    .size-modal-content-top-{{ section.id }} {
+      margin-top: {{ title_mt }}px;
+    }
+
+    .size-modal-title-{{ section.id }} {
+      font-size: {{ title_size }}px;
+    }
+
+    .size-toggle-icon-{{ section.id }} img,
+    .size-toggle-icon-{{ section.id }} svg {
+      width: {{ icon_size }}px;
+    }
+
+    .size-modal-text-{{ section.id }} {
+      margin-top: {{ text_mt }}px;
+      text-align: {{ text_align }};
+    }
+
+    .size-modal-table-{{ section.id }} {
+      text-align: {{ text_align }};
+      margin-left: -{{ modal_padding_horizontal }}px;
+      padding-left: {{ modal_padding_horizontal }}px;
+      padding-right: {{ modal_padding_horizontal }}px;
+    }
+  
+    .size-modal-text-{{ section.id }} *,
+    .size-modal-table-{{ section.id }} * {
+      font-size: {{ text_size }}px;
+    }
+
+    .size-modal-close-{{ section.id }} {
+      top: 30px !important;
+      right: 30px !important;
+    }
+
+    .size-modal-close-{{ section.id }} svg {
+      width: {{ close_icon_size }}px;
+    }
+
+    .size-modal-toggle-{{ section.id }} {
+      font-size: {{ switch_size }}px;
+    }
+
+    .size-modal-content-{{ section.id }} {
+      order: 1;
+      width: auto;
+    }
+
+    .size-modal-image-{{ section.id }} {
+      order: 2;
+    }
+
+  }
+  
+{%- endstyle -%}
+
+{% if toggle_custom %}
+  <style>
+    .size-toggle-{{ section.id }} * {
+      font-family: {{ toggle_font.family }}, {{ toggle_font.fallback_families }};
+      font-weight: {{ toggle_font.weight }};
+      font-style: {{ toggle_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if heading_custom %}
+  <style>
+    .size-modal-heading-{{ section.id }} * {
+      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      font-weight: {{ heading_font.weight }};
+      font-style: {{ heading_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if title_custom %}
+  <style>
+    .size-modal-title-{{ section.id }} {
+      font-family: {{ title_font.family }}, {{ title_font.fallback_families }};
+      font-weight: {{ title_font.weight }};
+      font-style: {{ title_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if switch_custom %}
+  <style>
+    .size-modal-toggle-{{ section.id }} {
+      font-family: {{ switch_font.family }}, {{ switch_font.fallback_families }};
+      font-weight: {{ switch_font.weight }};
+      font-style: {{ switch_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if text_custom %}
+  <style>
+    .size-modal-text-{{ section.id }} *,
+    .size-modal-table-{{ section.id }} * {
+      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+      font-weight: {{ text_font.weight }};
+      font-style: {{ text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_align_mobile == "center" %}
+  <style>
+    .size-toggle-{{ section.id }} {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+{% elsif toggle_align_mobile == "right" %}
+  <style>
+    .size-toggle-{{ section.id }} {
+      margin-left: auto;
+    }
+  </style>
+{% endif %}
+
+{% if toggle_align == "left" %}
+  <style>
+    @media(min-width: 1024px) {
+      .size-toggle-{{ section.id }} {
+        margin-left: 0px;
+        margin-right: 0px;
+      } 
+    }
+  </style>
+{% elsif toggle_align == "center" %}
+  <style>
+    @media(min-width: 1024px) {
+      .size-toggle-{{ section.id }} {
+        margin-left: auto;
+        margin-right: auto;
+      } 
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .size-toggle-{{ section.id }} {
+        margin-left: auto;
+        margin-right: 0px;
+      } 
+    }
+  </style>
+{% endif %}
+
+{% unless use_scrollbar %}
+  <style>
+    .size-modal-table-{{ section.id }} {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .size-modal-table-{{ section.id }}::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+{% endunless %}
+
+<script>
+  (function () {
+    function moreLoadProductForm() {
+      var productForm = document.querySelector('#ss-size-guide-2');
+      if (!productForm){
+        var productForm = document.querySelector('{% if guide_position == "below_title" or guide_position == "above_title" %}.product__title{% elsif guide_position == "below_description" or guide_position == "above_description" %}.product__description{% elsif guide_position == "below_price" %}.price.price--large.price--show-badge{% else %}.button--add-to-cart, .product .product-form, .product-single__add-to-cart, .shopify-payment-button, .shopify-payment-button__button, .ProductForm__BuyButtons, .add-to-cart{% endif %}');
+        if (!productForm) return;
+        }
+        const templateContent = document.querySelector(
+          '#ss-size-guide-2-{{ section.id }}'
+        ).content;
+
+        productForm.insertAdjacentElement(
+          '{% if guide_position == "below_buy" or guide_position == "below_title" or guide_position == "below_description" or guide_position == "below_price" %}afterend{% else %}beforebegin{% endif %}',
+          templateContent.firstElementChild
+        );
+
+      var bodyInner = document.querySelector('body');
+      const templateContent2 = document.querySelector(
+        '#ss-size-guide-2-modal-{{ section.id }}'
+      ).content;
+      
+      bodyInner.insertAdjacentElement(
+        'beforeend',
+        templateContent2.firstElementChild
+      );
+      
+    }
+    window.addEventListener('DOMContentLoaded', moreLoadProductForm);
+  })();
+</script>
+
+<template id="ss-size-guide-2-{{ section.id }}">
+  <div class="section-{{ section.id }} size-guide-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
+      {% if toggle != blank %}
+        <div class="size-toggle-{{ section.id }}">
+          <span>{{ toggle }}</span>
+          {% unless hide_icon %}
+            <div class="size-toggle-icon-{{ section.id }}">
+              {% if icon != blank %}
+                <img src="{{ icon | image_url }}" alt="{{ icon.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+              {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <g clip-path="url(#clip0_1_3)">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.625863 16.1183C-0.0280383 16.7722 -0.0280383 17.8324 0.625863 18.4863L5.36183 23.2223C6.01573 23.8762 7.07592 23.8762 7.72982 23.2223L23.1217 7.83037C23.7756 7.17647 23.7756 6.11629 23.1217 5.46239L18.3858 0.726418C17.7319 0.0725167 16.6717 0.0725178 16.0178 0.726418L0.625863 16.1183ZM6.74316 11.5797L4.37515 13.9477L6.34849 15.921C6.67544 16.248 6.67544 16.7781 6.34849 17.105C6.02154 17.432 5.49145 17.432 5.1645 17.105L3.19116 15.1317L1.41519 16.9077C1.19722 17.1256 1.19722 17.479 1.41519 17.697L6.15116 22.433C6.36913 22.6509 6.72252 22.6509 6.94049 22.433L22.3324 7.04105C22.5504 6.82308 22.5504 6.46968 22.3324 6.25172L17.5964 1.51575C17.3785 1.29778 17.0251 1.29778 16.8071 1.51575L15.0311 3.29175L17.0044 5.26507C17.3314 5.59202 17.3314 6.12211 17.0044 6.44906C16.6775 6.77601 16.1474 6.77601 15.8204 6.44906L13.8471 4.47574L11.4791 6.84372L13.4524 8.81704C13.7794 9.14399 13.7794 9.67409 13.4524 10.001C13.1255 10.328 12.5954 10.328 12.2685 10.001L10.2951 8.02771L7.92715 10.3957L9.90047 12.369C10.2274 12.696 10.2274 13.2261 9.90047 13.553C9.57352 13.88 9.04343 13.88 8.71648 13.553L6.74316 11.5797Z" fill="black"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_1_3">
+                  <rect width="24" height="24" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              {% endif %}
+            </div>
+          {% endunless %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</template>
+
+<template class="size-modal-wrapper-{{ section.id }}" id="ss-size-guide-2-modal-{{ section.id }}">
+  <div class="size-modal-{{ section.id }}">
+    <div class="size-modal-inner-{{ section.id }}">
+      <button class="size-modal-close-{{ section.id }}">
+        <svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z" fill="white"></path></svg>
+      </button>
+
+      {% if heading != blank %}
+        <div class="size-modal-heading-{{ section.id }}">
+          {{ heading }}
+        </div>
+      {% endif %}
+
+      <div class="size-modal-content-top-{{ section.id }}">
+        {% if title != blank %}
+          <p class="size-modal-title-{{ section.id }}">{{ title }}</p>
+        {% endif %}
+        {% if section.blocks.size > 1 %}
+          <div class="size-modal-toggles-{{ section.id }}">
+            <div class="size-modal-toggles-inner-{{ section.id }}">
+              {% for block in section.blocks %}
+                <span class="size-modal-toggle-{{ section.id }}">{{ block.settings.toggle_text }}</span>
+              {% endfor %}
+              <span class="size-modal-toggle-active-{{ section.id }}"></span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      
+      <div class="size-modal-body-{{ section.id }}">
+        <div class="size-modal-content-{{ section.id }}">
+          {% if section.blocks.size > 0 %}
+            <div class="size-modal-tables-{{ section.id }}">
+              {% for block in section.blocks %}
+                <div class="size-modal-table-{{ section.id }}">
+                  {% if block.settings.size_chart_page != blank %}
+                    {{ block.settings.size_chart_page.content }}
+                  {% else %}
+                    {{ block.settings.text }}
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <div class="size-modal-text-{{ section.id }}">
+            {{ text }}
+          </div>
+        </div>
+        {% unless hide_modal_image %}
+          <div class="size-modal-image-{{ section.id }}">
+            {% if modal_image != blank %}
+              <img src="{{ modal_image | image_url }}" alt="{{ modal_image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        {% endunless %}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  function initSizeGuide() {
+    setTimeout(() => {
+
+      let toggle = document.querySelector('.size-toggle-{{ section.id }}');
+      const modal = document.querySelector('.size-modal-{{ section.id }}');
+      const close = document.querySelector('.size-modal-close-{{ section.id }}');
+      if(toggle) {
+        toggle.addEventListener('click', () => {
+          document.body.style.overflow = 'hidden';
+          modal.classList.add('active');
+        })
+      }
+
+      close.addEventListener('click', () => {
+          document.body.style.overflow = '';
+          modal.classList.remove('active');
+      });
+      
+      document.addEventListener('click', (e) => {
+          if (e.target == modal) {
+            document.body.style.overflow = '';
+            modal.classList.remove('active');
+          }
+      });
+
+    let toggles = document.querySelector('.size-modal-toggles-{{ section.id }}');
+    let tables = document.querySelector('.size-modal-tables-{{ section.id }}');
+    if(toggles) {
+      toggles.addEventListener('click', () => {
+        toggles.classList.toggle('active');
+        tables.classList.toggle('active');
+      })
+    }
+      
+    }, 400)
+  }
+  
+  document.addEventListener('DOMContentLoaded', initSizeGuide);
+  
+  if (Shopify.designMode) {
+     document.addEventListener('shopify:section:unload', initSizeGuide);
+     document.addEventListener('shopify:section:load', initSizeGuide);
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "SS - Size guide #2",
+    "settings": [
+      {
+        "type": "header",
+        "content": "⚠️ Save settings to view updates",
+        "info":"Learn how to add snippet sections with [this tutorial](https://section-store.helpscoutdocs.com/article/10-adding-product-page-snippets)"
+      },
+      {
+        "type": "header",
+        "content":"Custom placement",
+        "info": "Copy this code: <div id='ss-size-guide-2'></div> - Click 'Add block' -> Custom Liquid/HTML -> Paste."
+      },
+      {
+        "type": "select",
+        "id": "guide_position",
+        "label": "Position",
+        "default": "below_price",
+        "options": [
+          {
+            "label": "Above buy buttons",
+            "value": "above_buy"
+          },
+          {
+            "label": "Below buy buttons",
+            "value": "below_buy"
+          },
+          {
+            "label": "Above product title",
+            "value": "above_title"
+          },
+          {
+            "label": "Below product title",
+            "value": "below_title"
+          },
+          {
+            "label": "Above product description",
+            "value": "above_description"
+          },
+          {
+            "label": "Below product description",
+            "value": "below_description"
+          },
+          {
+            "label": "Below price",
+            "value": "below_price"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Toggle settings"
+      },
+      {
+        "type": "text",
+        "id": "toggle",
+        "label": "Text",
+        "default": "Size Guide"
+      },
+      {
+        "type": "checkbox",
+        "id": "toggle_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "toggle_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "toggle_size",
+        "min": 0,
+        "max": 72,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "toggle_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "toggle_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "text_alignment",
+        "id": "toggle_align",
+        "label": "Alignment",
+        "default": "right"
+      },
+      {
+        "type": "text_alignment",
+        "id": "toggle_align_mobile",
+        "label": "Alignment - mobile",
+        "default": "right"
+      },
+      {
+        "type": "header",
+        "content": "Toggle icon settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Custom icon"
+      },
+      {
+        "type": "range",
+        "id": "icon_size",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "icon_size_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Size - mobile",
+        "default": 14
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_icon",
+        "label": "Hide icon",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Modal settings"
+      },
+      {
+         "type": "range",
+         "id": "modal_width",
+         "min": 10,
+         "max": 100,
+         "step": 5,
+         "unit": "%",
+         "label": "Width",
+         "default": 100
+      },
+      {
+         "type": "range",
+         "id": "modal_width_mobile",
+         "min": 10,
+         "max": 100,
+         "step": 5,
+         "unit": "%",
+         "label": "Width - mobile",
+         "default": 100
+      },
+      {
+        "type": "range",
+        "id": "modal_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "modal_padding_vertical_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical - mobile",
+        "default": 40
+      },
+      {
+         "type": "range",
+         "id": "modal_padding_horizontal",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Padding horizontal",
+         "default": 40
+      },
+      {
+         "type": "range",
+         "id": "modal_padding_horizontal_mobile",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Padding horizontal - mobile",
+         "default": 20
+      },
+      {
+         "type": "range",
+         "id": "modal_radius",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Roundness",
+         "default": 8
+      },
+      {
+         "type": "range",
+         "id": "modal_border_thickness",
+         "min": 0,
+         "max": 10,
+         "step": 1,
+         "unit": "px",
+         "label": "Border thickness",
+         "default": 0
+      },
+      {
+        "type": "range",
+        "id": "modal_overlay",
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "label": "Overlay",
+        "default": 0.3
+      },
+      {
+        "type": "header",
+        "content": "Modal close settings"
+      },
+      {
+        "type": "range",
+        "id": "close_icon_size",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Icon size",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "close_icon_size_mobile",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Icon size - mobile",
+        "default": 18
+      },
+      {
+        "type": "header",
+        "content": "Modal layout settings"
+      },
+      {
+        "type": "range",
+        "id": "body_gap",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "body_gap_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "body_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "body_mt_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Heading settings"
+      },
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Text",
+        "default": "<h2>Size Guide</h2>"
+      },
+      {
+        "type": "checkbox",
+        "id": "heading_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_size",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "heading_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "heading_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "text_alignment",
+        "id": "heading_align",
+        "label": "Alignment"
+      },
+      {
+        "type": "text_alignment",
+        "id": "heading_align_mobile",
+        "label": "Alignment - mobile"
+      },
+      {
+        "type": "header",
+        "content": "Subheading settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Text",
+        "default": "Product measurements"
+      },
+      {
+        "type": "checkbox",
+        "id": "title_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "title_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "title_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "title_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 18
+      },
+      {
+        "type": "range",
+        "id": "title_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "range",
+        "id": "title_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "title_mt_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "Switches settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "switch_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "switch_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "switch_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "switch_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "switch_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 100
+      },
+      {
+         "type": "range",
+         "id": "switch_radius",
+         "min": 0,
+         "max": 200,
+         "step": 2,
+         "unit": "px",
+         "label": "Roundness",
+         "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Text settings"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Size guide text</p>"
+      },
+      {
+        "type": "checkbox",
+        "id": "text_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "text_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "text_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "text_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "range",
+        "id": "text_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_mt_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 20
+      },
+      {
+        "type": "text_alignment",
+        "id": "text_align",
+        "label": "Alignment"
+      },
+      {
+        "type": "text_alignment",
+        "id": "text_align_mobile",
+        "label": "Alignment - mobile"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_scrollbar",
+        "label": "Use scrollbar"
+      },
+      {
+        "type": "header",
+        "content": "Modal image settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "modal_image",
+        "label": "Image"
+      },
+      {
+        "type": "range",
+        "id": "modal_image_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_modal_image",
+        "label": "Hide modal image"
+      },
+      {
+        "type": "header",
+        "content": "Modal colors"
+      },
+      {
+        "type": "color",
+        "label": "Overlay",
+        "id": "modal_overlay_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "modal_bg_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "modal_border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Close icon",
+        "id": "close_icon_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Modal content colors"
+      },
+      {
+        "type": "color",
+        "label": "Heading",
+        "id": "heading_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Subheading",
+        "id": "title_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Text",
+        "id": "text_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Switches colors"
+      },
+      {
+        "type": "color",
+        "label": "Text",
+        "id": "switch_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Text active",
+        "id": "switch_active_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "label": "Background active",
+        "id": "switch_bg_active_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "switches_border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Section colors"
+      },
+      {
+        "type": "color",
+        "label": "Toggle",
+        "id": "toggle_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Toggle hover",
+        "id": "toggle_hover_color",
+        "default": "#555555"
+      },
+      {
+        "type": "color",
+        "label": "Section background",
+        "id": "background_color"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Section background gradient"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Section margin (outside)"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": -40,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": -40,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin bottom",
+        "default": -10
+      },
+      {
+        "type": "header",
+        "content": "Section padding (inside)"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 0
+      },
+      {
+         "type": "range",
+         "id": "padding_bottom",
+         "min": 0,
+         "max": 100,
+         "step": 4,
+         "unit": "px",
+         "label": "Padding bottom",
+         "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Padding sides",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Padding sides mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+      {
+        "type": "range",
+        "id": "border_thickness",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "lazy",
+        "label": "Lazy load",
+        "info": "Lazy load images for speed optimisation",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "size_chart",
+        "limit": 2,
+        "name": "Size Chart",
+        "settings": [
+          {
+            "type": "text",
+            "id": "toggle_text",
+            "label": "Toggle text",
+            "default": "CM"
+          },
+          {
+            "type": "page",
+            "id": "size_chart_page",
+            "label": "Page containing size chart"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Size chart content</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "SS - Size guide #2",
+        "blocks": [
+          {
+            "type": "size_chart",
+            "settings": {
+              "toggle_text": "INCH"
+            }
+          },
+          {
+            "type": "size_chart"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

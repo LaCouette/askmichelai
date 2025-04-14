@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskMichel.ai - Sections Shopify sans code | Boostez vos conversions</title>
+    <!-- Polices de caractères -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@700,500,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS et JS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="landing-page">
+            <header>
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="/static/img/logo inline white.png" alt="AskMichel.ai Logo" style="height: 32px; width: auto;">
+                    </div>
+                    <nav class="main-nav">
+                        <button class="nav-btn">Comment ça marche</button>
+                        <button class="nav-btn">Exemples</button>
+                    </nav>
+                    <div class="cta-buttons">
+                        <button class="btn btn-secondary">Se connecter</button>
+                        <button class="btn btn-primary">Essayer gratuitement</button>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <div class="hero-section">
+                    <h1 class="hero-title">Plus de dev. Plus de galère. Michel <span class="accent">fait exploser</span> ton CVR.</h1>
+                    <p class="hero-subtitle">Dis à Michel ce que tu veux, il te génère le code prêt à coller. En 10 secondes.</p>
+
+                <form id="promptForm" class="prompt-container">
+                        <div class="prompt-input-wrapper">
+                            <textarea id="userPrompt" placeholder="Ex: Je veux une section bannière avec une offre flash + un bouton d'achat qui redirige vers ma collection best-seller..."></textarea>
+                        
+                            <div class="prompt-actions">
+                            <label for="imageUpload" class="upload-btn" title="Ajouter une image">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <polyline points="21 15 16 10 5 21"/>
+                                </svg>
+                                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                            </label>
+                                <button type="submit" class="btn btn-primary send-btn">
+                                    <span>🚀 Générer ma section en 10 secondes</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="uploadPreview" class="upload-preview"></div>
+                </form>
+
+                    <div class="social-proof">
+                        <div class="proof-item">
+                            <span class="proof-icon">🛍️</span>
+                            <p><strong>300+ utilisateurs</strong> conquis</p>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-icon">⭐</span>
+                            <p>Noté <strong>4.9/5</strong> en moyenne</p>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-icon">⚡</span>
+                            <p><strong>1500+ sections</strong> créées</p>
+                        </div>
+                    </div>
+
+                    <div class="prompt-examples">
+                        <p class="examples-title">Besoin d'inspiration ? Essayez ces sections populaires :</p>
+                        <div class="example-tags">
+                            <button class="example-tag">Carrousel produit dynamique</button>
+                            <button class="example-tag">Section FAQ avec accordéon</button>
+                            <button class="example-tag">Grille de collections chic</button>
+                            <button class="example-tag">Bannière promo animée</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h2 class="section-title">Voir c'est croire : Michel en action</h2>
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="play-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                </svg>
+                            </div>
+                            <p>Regardez comment créer et intégrer une section en moins de 30 secondes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h2 class="section-title">Pourquoi Michel est plus malin qu'un dev</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">💰 Économisez des centaines d'euros de dev</h3>
+                            <p class="feature-description">Fini les devis à 300€ pour un simple slider. Créez autant de sections que vous voulez, sans limite et sans frais cachés.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 20h.01M7 20v-4m0 0l-2.75-5.5M7 16l2.75-5.5M14 10V6a4 4 0 0 0-4-4v0a4 4 0 0 0-4 4v4"></path>
+                                    <path d="M14 10h1.5a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H10" />
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">🎨 Des sections ultra pro qui convertissent</h3>
+                            <p class="feature-description">Des designs qui s'intègrent parfaitement à votre thème et qui donnent envie à vos visiteurs de passer à l'action.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">⚡ Gagnez des heures précieuses</h3>
+                            <p class="feature-description">Décrivez votre besoin, copiez-collez le code, et c'est en ligne. Pas de délai, pas d'allers-retours, pas de prise de tête.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">✅ Compatible avec tous les thèmes</h3>
+                            <p class="feature-description">Que vous utilisiez Dawn, Online Store 2.0 ou un thème premium, les sections générées fonctionnent parfaitement sur tous les thèmes Shopify.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pricing-section">
+                    <h2 class="section-title">Une solution pour chaque besoin</h2>
+                    <p class="section-subtitle">Choisissez le plan qui correspond à vos ambitions</p>
+                    
+                    <div class="pricing-cards">
+                        <div class="pricing-card free">
+                            <div class="pricing-card-header">
+                                <h3>Freemium</h3>
+                                <div class="pricing-amount">
+                                    <span class="pricing-price">0€</span>
+                                    <span class="pricing-period">à vie</span>
+                                </div>
+                            </div>
+                            <div class="pricing-divider"></div>
+                            <ul class="pricing-features">
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    1 section gratuite à vie
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Personnalisation de base
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Support communautaire
+                                </li>
+                                <li class="feature-disabled">
+                                    <span class="feature-cross">×</span>
+                                    Accès aux templates
+                                </li>
+                            </ul>
+                            <button class="btn btn-secondary pricing-btn">Créer ma section offerte</button>
+                        </div>
+                        
+                        <div class="pricing-card starter">
+                            <div class="pricing-card-header">
+                                <h3>Starter</h3>
+                                <div class="pricing-amount">
+                                    <span class="pricing-price">9€</span>
+                                    <span class="pricing-period">/mois</span>
+                                </div>
+                            </div>
+                            <div class="pricing-divider"></div>
+                            <ul class="pricing-features">
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    5 sections par mois
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Accès à 20 templates basiques
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Support par email
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Paramètres avancés
+                                </li>
+                            </ul>
+                            <button class="btn btn-secondary pricing-btn">Commencer l'essai gratuit</button>
+                        </div>
+                        
+                        <div class="pricing-card pro">
+                            <div class="pricing-badge">Populaire</div>
+                            <div class="pricing-card-header">
+                                <h3>Pro</h3>
+                                <div class="pricing-amount">
+                                    <span class="pricing-price">19€</span>
+                                    <span class="pricing-period">/mois</span>
+                                </div>
+                            </div>
+                            <div class="pricing-divider"></div>
+                            <ul class="pricing-features">
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    <strong>Sections illimitées</strong>
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Accès à 100+ templates avancés
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Support prioritaire
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Export personnalisé
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary pricing-btn">Démarrer maintenant</button>
+                        </div>
+                        
+                        <div class="pricing-card lifetime">
+                            <div class="pricing-badge special">Offre Limitée</div>
+                            <div class="pricing-card-header">
+                                <h3>Lifetime Deal</h3>
+                                <div class="pricing-amount">
+                                    <span class="pricing-price">59€</span>
+                                    <span class="pricing-period">à vie</span>
+                                </div>
+                            </div>
+                            <div class="pricing-counter">
+                                <div class="counter-label">Places restantes</div>
+                                <div class="counter-value">47/100</div>
+                            </div>
+                            <div class="pricing-divider"></div>
+                            <ul class="pricing-features">
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    <strong>Sections illimitées à vie</strong>
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Tous les templates actuels et futurs
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Support VIP prioritaire
+                                </li>
+                                <li>
+                                    <span class="feature-check">✓</span>
+                                    Pas d'abonnement, jamais
+                                </li>
+                            </ul>
+                            <button class="btn btn-accent pricing-btn">Profiter de l'offre</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="examples-section">
+                    <h2 class="section-title">Sections prêtes à l'emploi</h2>
+                    <p class="section-subtitle">Sélectionnez et personnalisez ces modèles populaires en quelques clics</p>
+                    
+                    <div class="examples-grid">
+                        <div class="example-card">
+                            <div class="example-preview">
+                                <img src="/static/img/s1.jpeg" alt="Carrousel produit dynamique">
+                            </div>
+                            <h3>Carrousel produit dynamique</h3>
+                            <p>Mettez en avant vos meilleurs produits avec un carrousel élégant qui booste vos ventes.</p>
+                            <button class="btn btn-secondary example-btn">Utiliser cette section</button>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-preview">
+                                <img src="/static/img/s2.png" alt="Section FAQ avec accordéon">
+                            </div>
+                            <h3>FAQ avec accordéon</h3>
+                            <p>Répondez aux questions fréquentes de vos clients et améliorez votre taux de conversion.</p>
+                            <button class="btn btn-secondary example-btn">Utiliser cette section</button>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-preview">
+                                <img src="/static/img/s3.png" alt="Grille de collections chic">
+                            </div>
+                            <h3>Grille de collections chic</h3>
+                            <p>Présentez vos collections avec style et guidez vos visiteurs vers vos produits phares.</p>
+                            <button class="btn btn-secondary example-btn">Utiliser cette section</button>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-preview">
+                                <img src="/static/img/s4.png" alt="Bannière promo animée">
+                            </div>
+                            <h3>Bannière promo animée</h3>
+                            <p>Attirez l'attention sur vos offres spéciales avec une bannière animée qui convertit.</p>
+                            <button class="btn btn-secondary example-btn">Utiliser cette section</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <div class="sticky-bar">
+                <p>Besoin d'une section pour booster vos ventes ?</p>
+                <button class="btn btn-primary">🚀 Créer ma section sur mesure</button>
+            </div>
+
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-branding">
+                        <div class="footer-logo">
+                            <img src="/static/img/logo inline white.png" alt="AskMichel.ai Logo" style="height: 24px; width: auto;">
+                        </div>
+                        <p class="footer-tagline">Votre assistant IA pour créer des sections Shopify qui convertissent</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-links-group">
+                            <h4>Produit</h4>
+                            <a href="#">Fonctionnalités</a>
+                            <a href="#">Tarifs</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                        <div class="footer-links-group">
+                            <h4>Ressources</h4>
+                            <a href="#">Guide de démarrage</a>
+                            <a href="#">Bibliothèque de sections</a>
+                            <a href="#">Tutos Shopify</a>
+                        </div>
+                        <div class="footer-links-group">
+                            <h4>Entreprise</h4>
+                            <a href="#">À propos</a>
+                            <a href="#">Contact</a>
+                            <a href="#">Mentions légales</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 AskMichel.ai. Non affilié à Shopify. Tous droits réservés.</p>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Sera affiché après soumission -->
+        <div class="analysis-page" style="display: none;">
+            <!-- Le contenu sera généré dynamiquement par JS -->
+        </div>
+    </div>
+
+    <script src="/static/js/new-script.js"></script>
+</body>
+</html>

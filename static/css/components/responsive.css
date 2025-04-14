@@ -1,0 +1,148 @@
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2.75rem;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+  
+  .pricing-cards {
+    gap: var(--space-md);
+  }
+  
+  .pricing-card {
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: var(--space-md);
+  }
+  
+  .cta-buttons {
+    margin-left: auto;
+  }
+  
+  .main-nav {
+    order: 3;
+    width: 100%;
+    margin-top: var(--space-md);
+    justify-content: center;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+  
+  /* Style the content wrapper for smaller screens */
+  .header-content {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    max-width: 100%; /* Full width */
+    margin: 0; /* Reset margin */
+    padding: 0; /* Header element provides padding */
+  }
+  
+  /* Social proof for mobile */
+  .social-proof {
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: center;
+    padding: var(--space-sm);
+  }
+  
+  .proof-item {
+    width: 100%;
+    padding: var(--space-xs);
+    white-space: normal;
+    justify-content: center;
+    min-width: unset;
+  }
+  
+  .proof-item p {
+    white-space: normal;
+  }
+  
+  /* Sticky bar for mobile */
+  .sticky-bar {
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
+  }
+  
+  /* Examples grid for mobile */
+  .examples-grid {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  /* Video placeholder for mobile */
+  .video-placeholder p {
+    font-size: 0.9rem;
+    bottom: var(--space-md);
+  }
+  
+  /* Pricing for mobile */
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pricing-card {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .example-tags {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .example-tag {
+    text-align: center;
+  }
+  
+  .btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.85rem;
+  }
+  
+  main {
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .result-content {
+    max-height: 400px;
+  }
+  
+  .toast {
+    min-width: 200px;
+    max-width: 300px;
+  }
+} 
