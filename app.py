@@ -46,6 +46,11 @@ async def read_root(request: Request):
     """Render the chat interface."""
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/delivery", response_class=HTMLResponse)
+async def delivery_page(request: Request):
+    """Render the code delivery page."""
+    return templates.TemplateResponse("delivery.html", {"request": request})
+
 @app.post("/api/chat")
 async def chat(
     session_id: str = Form(...),

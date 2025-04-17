@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Selected image file
     let selectedImage = null;
     
+    // Store the original prompt
+    let currentOriginalPrompt = '';
+    
     // Event listeners
     promptForm.addEventListener('submit', handleSubmit);
     imageUpload.addEventListener('change', handleImageUpload);
@@ -79,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const message = userPrompt.value.trim();
         if (!message && !selectedImage) return;
+        
+        // Store the original prompt
+        currentOriginalPrompt = message;
         
         // Show analysis page and hide landing page
         landingPage.style.display = 'none';
@@ -535,19 +541,99 @@ document.addEventListener('DOMContentLoaded', () => {
         const formHtml = `
             <div class="questions-section">
                 <h2>Il me faut des précisions, évidemment</h2>
-                <p>Je ne peux pas lire dans vos pensées, même si ce serait probablement plus divertissant que certaines des sections qu'on me demande de coder. Veuillez répondre aux questions suivantes :</p>
                 
+                <div class="skip-questions-banner">
+                    <p class="skip-question-prompt">Pas envie de répondre aux questions aujourd'hui ?</p>
+                    <button type="button" id="skipQuestionsBtn" class="btn btn-accent skip-btn">🤯 Laisser Michel n'en faire qu'à sa tête</button>
+                </div>
+
+                <div class="questions-divider">
+                    <span>OU</span>
+                </div>
+
                 <form id="questionsForm" class="questions-form">
+                    <p><strong>Aidez-moi à vous aider en répondant ci-dessous :</strong></p>
                     ${questions.map((q, index) => `
                         <div class="question-item">
                             <label for="answer-${index}">${index + 1}. ${escapeHtml(q)}</label>
                             <input type="text" id="answer-${index}" name="answer-${index}" placeholder="Une réponse concise serait appréciée..." required>
                         </div>
                     `).join('')}
-                    <button type="submit">Envoyer et mettre fin à mon supplice</button>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Envoyer les réponses</button>
+                    </div>
                 </form>
             </div>
         `;
+        
+        // Ajouter du CSS inline pour les nouveaux éléments
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+            .skip-questions-banner {
+                text-align: center;
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .skip-question-prompt {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                color: #f0f0f0;
+                text-align: center;
+            }
+            
+            .skip-btn {
+                font-size: 1rem;
+                padding: 0.8rem 1.6rem;
+                background: linear-gradient(135deg, #9c6fff 0%, #5448de 100%);
+                border: none;
+                box-shadow: 0 4px 10px rgba(84, 72, 222, 0.3);
+                transition: all 0.3s ease;
+                margin: 0 auto;
+                display: block;
+                width: fit-content;
+            }
+            
+            .skip-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(84, 72, 222, 0.4);
+            }
+            
+            .questions-divider {
+                position: relative;
+                text-align: center;
+                margin: 2rem 0;
+            }
+            
+            .questions-divider:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: rgba(255, 255, 255, 0.1);
+                z-index: 1;
+            }
+            
+            .questions-divider span {
+                display: inline-block;
+                position: relative;
+                padding: 0 1rem;
+                background: #1e1e1e;
+                color: #999;
+                font-size: 0.9rem;
+                z-index: 2;
+            }
+        `;
+        document.head.appendChild(styleElement);
         
         container.innerHTML = formHtml;
         
@@ -555,6 +641,64 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('questionsForm').addEventListener('submit', async (event) => {
             event.preventDefault();
             await handleAnswersSubmit(event, container);
+        });
+
+        // Add event listener to the skip button
+        document.getElementById('skipQuestionsBtn').addEventListener('click', async () => {
+            // Show a loading message
+            container.innerHTML = `
+                <div class="loading-message">
+                    <span>Sage décision. Je génère le code avec mes choix par défaut...</span>
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            `;
+
+            // Prepare form data with the *original* prompt, indicating a skip
+            const formData = new FormData();
+            formData.append('session_id', sessionId);
+            // Send the original prompt back. The backend logic (agent prompt) 
+            // should understand that receiving the prompt again after questions means skipping.
+            formData.append('message', currentOriginalPrompt); 
+            // DO NOT send 'answers'
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Handle the response (should be code now)
+                if (data.type === 'code') {
+                    const resultContainer = document.getElementById('resultContainer');
+                    displayFinalCode(data.content, resultContainer);
+                    container.innerHTML = ''; // Clear the questions container
+                } else {
+                    // Unexpected response type (e.g., more questions? error?)
+                    console.error('Unexpected response after skipping questions:', data);
+                    container.innerHTML = `
+                        <div class="error-message">
+                            Même en décidant pour vous, quelque chose a mal tourné. C'est sûrement de ma faute.
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error submitting skip:', error);
+                container.innerHTML = `
+                    <div class="error-message">
+                        Une erreur s'est produite lors du skip : ${error.message}. Essayez de répondre aux questions peut-être ?
+                    </div>
+                `;
+            }
         });
     }
     
@@ -623,6 +767,23 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Display the final code
     function displayFinalCode(code, container) {
+        // Extraire le nom de la section depuis le code (première ligne de commentaire ou nom du fichier .liquid)
+        let sectionName = 'Section Shopify Michel';
+        
+        // Trouver le nom de la section dans le code
+        const nameMatch = code.match(/\/\*\s*(.*Michel.*)\s*\*\//) || code.match(/{{[\s]*section\.name[\s]*}}/);
+        if (nameMatch && nameMatch[1]) {
+            sectionName = nameMatch[1].trim();
+        }
+        
+        // Stocker le code et le nom de la section dans sessionStorage
+        sessionStorage.setItem('generatedCode', code);
+        sessionStorage.setItem('sectionName', sectionName);
+        
+        // Rediriger vers la page de livraison
+        window.location.href = '/delivery';
+        
+        // Le code ci-dessous ne sera exécuté que si la redirection échoue
         container.innerHTML = `
             <div class="result-container">
                 <div class="result-header">

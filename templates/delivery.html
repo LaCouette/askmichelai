@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Section Shopify est Prête! | AskMichel.ai</title>
+    <!-- Polices de caractères -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@700,500,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS et JS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Variables pour grille de fond et lueurs */
+        :root {
+            --grid-color-1: rgba(92, 106, 196, 0.1);
+            --grid-color-2: rgba(80, 184, 60, 0.08);
+            --grid-accent: rgba(80, 184, 60, 0.25);
+            --bg-primary: #0a0a0c;
+        }
+        
+        body {
+            background-color: var(--bg-primary);
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Arrière-plan avec grille et lueurs comme sur landing-page */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.9)),
+                linear-gradient(to right, var(--grid-color-1) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color-1) 1px, transparent 1px),
+                radial-gradient(circle at 20% 30%, var(--grid-color-2) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, var(--grid-accent) 0%, transparent 50%);
+            background-size: 
+                100% 100%,
+                30px 30px, 
+                30px 30px,
+                100% 100%,
+                100% 100%;
+            background-position: 0 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Grille plus large en superposition */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(92, 106, 196, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(92, 106, 196, 0.05) 1px, transparent 1px),
+                radial-gradient(circle at 30% 60%, rgba(92, 106, 196, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 70% 20%, rgba(80, 184, 60, 0.12) 0%, transparent 30%);
+            background-size: 
+                100px 100px, 
+                100px 100px,
+                100% 100%,
+                100% 100%;
+            background-position: 0 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Styles spécifiques à la page de livraison */
+        .delivery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 1. Bannière de succès */
+        .success-banner {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(156, 111, 255, 0.1) 0%, rgba(84, 72, 222, 0.1) 100%);
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success-banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #9c6fff 0%, #5448de 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fade-in 0.8s ease-out;
+        }
+        
+        .success-banner p {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 0;
+            animation: fade-in 1s ease-out;
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 2. Zone de code avec contexte */
+        .code-section {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .performance-badge {
+            background: rgba(0, 200, 83, 0.1);
+            color: #00c853;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .performance-badge svg {
+            margin-right: 0.5rem;
+        }
+        
+        .code-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .code-content {
+            max-height: 500px;
+            overflow-y: auto;
+            background: #121212;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        pre {
+            margin: 0;
+            border-radius: 8px;
+        }
+        
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .copy-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #9c6fff 0%, #5448de 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(84, 72, 222, 0.3);
+        }
+        
+        .copy-btn svg {
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        /* 3. Guide d'implémentation visuel */
+        .implementation-guide {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .guide-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 900px) {
+            .steps-container {
+                flex-direction: column;
+            }
+        }
+        
+        .step-item {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-item:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 3rem;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px dashed rgba(156, 111, 255, 0.5);
+            border-right: 2px dashed rgba(156, 111, 255, 0.5);
+            transform: rotate(45deg);
+        }
+        
+        @media (max-width: 900px) {
+            .step-item:not(:last-child):after {
+                top: auto;
+                right: 50%;
+                bottom: -30px;
+                transform: rotate(135deg);
+            }
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #9c6fff 0%, #5448de 100%);
+            color: white;
+            border-radius: 50%;
+            line-height: 32px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .step-image {
+            width: 100%;
+            max-width: 200px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            background: #2a2a2a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step-image img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+        
+        .step-description {
+            font-size: 0.9rem;
+            color: #ddd;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-time {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        /* 4. FAQ contextuelle */
+        .faq-section {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .faq-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #f0f0f0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-answer {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        /* Back Button and Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button svg {
+            margin-right: 0.5rem;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .create-new-btn {
+            background: linear-gradient(135deg, #9c6fff 0%, #5448de 100%);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .create-new-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(84, 72, 222, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="delivery-container">
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="back-button" id="backBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Retour
+            </button>
+            <button class="create-new-btn" id="newSectionBtn">Créer une nouvelle section</button>
+        </div>
+        
+        <!-- 1. Bannière de succès -->
+        <div class="success-banner">
+            <h1>Votre section est prête! 🎉</h1>
+            <p id="sectionName">Section Slider Michel</p>
+        </div>
+        
+        <!-- 2. Zone de code avec contexte -->
+        <div class="code-section">
+            <div class="code-header">
+                <div class="code-title">Voilà votre chef-d'œuvre en Liquid</div>
+                <div class="performance-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                    </svg>
+                    Optimisé: chargement < 0.5s
+                </div>
+            </div>
+            
+            <div class="code-container">
+                <div class="code-content">
+                    <pre><code class="language-liquid" id="codeOutput">Le code sera inséré ici via JavaScript</code></pre>
+                </div>
+            </div>
+            
+            <button class="copy-btn" id="copyBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copier ce code
+            </button>
+        </div>
+        
+        <!-- 3. Guide d'implémentation visuel -->
+        <div class="implementation-guide">
+            <h2 class="guide-title">Comment ajouter cette section à votre boutique</h2>
+            
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-image">
+                        <img src="/static/img/step1.svg" alt="Accéder à l'éditeur de thème">
+                    </div>
+                    <div class="step-description">Accédez à l'éditeur de thème dans votre admin Shopify</div>
+                    <div class="step-time">±1 minute</div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-image">
+                        <img src="/static/img/step2.svg" alt="Créer un nouveau fichier">
+                    </div>
+                    <div class="step-description">Créez un nouveau fichier 'section'</div>
+                    <div class="step-time">±1 minute</div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-image">
+                        <img src="/static/img/step3.svg" alt="Coller le code">
+                    </div>
+                    <div class="step-description">Collez le code de votre section</div>
+                    <div class="step-time">±30 secondes</div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-image">
+                        <img src="/static/img/step4.svg" alt="Ajouter à votre page">
+                    </div>
+                    <div class="step-description">Ajoutez la section à la page de votre choix</div>
+                    <div class="step-time">±1 minute</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. FAQ contextuelle -->
+        <div class="faq-section">
+            <h2 class="faq-title">Questions fréquentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Comment puis-je personnaliser les couleurs de cette section?</div>
+                <div class="faq-answer">Après avoir ajouté la section à votre page, cliquez dessus dans l'éditeur de thème. Un panneau de personnalisation apparaîtra à gauche avec toutes les options configurables comme les couleurs, les textes et les images.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Cette section est-elle compatible avec mon thème?</div>
+                <div class="faq-answer">Oui! Toutes les sections créées par Michel sont compatibles avec tous les thèmes Shopify modernes (Online Store 2.0). Le code est écrit selon les standards Shopify et adapté pour être responsive sur tous les appareils.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Puis-je modifier le code après l'avoir ajouté?</div>
+                <div class="faq-answer">Absolument. Vous pouvez modifier le code dans l'éditeur de thème à tout moment. Cependant, assurez-vous de comprendre les changements que vous apportez pour éviter de casser la fonctionnalité de la section.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Je rencontre un problème avec ma section, que faire?</div>
+                <div class="faq-answer">Si vous rencontrez des difficultés, essayez d'abord de vérifier que le code a été copié correctement et en intégralité. Si le problème persiste, n'hésitez pas à contacter notre support qui sera ravi de vous aider à résoudre le problème.</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Récupérer le code généré et les autres informations depuis sessionStorage
+            const code = sessionStorage.getItem('generatedCode') || 'Aucun code généré';
+            const sectionName = sessionStorage.getItem('sectionName') || 'Section Shopify Michel';
+            
+            // Afficher les informations sur la page
+            document.getElementById('codeOutput').textContent = code;
+            document.getElementById('sectionName').textContent = sectionName;
+            
+            // Initialiser la coloration syntaxique
+            document.querySelectorAll('pre code').forEach(block => {
+                hljs.highlightBlock(block);
+            });
+            
+            // Ajouter la fonctionnalité de copie
+            document.getElementById('copyBtn').addEventListener('click', () => {
+                navigator.clipboard.writeText(code).then(() => {
+                    const copyBtn = document.getElementById('copyBtn');
+                    copyBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Copié avec succès!
+                    `;
+                    copyBtn.style.backgroundColor = '#00c853';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copier ce code
+                        `;
+                        copyBtn.style.backgroundColor = '';
+                    }, 2000);
+                });
+            });
+            
+            // Ajouter les événements de navigation
+            document.getElementById('backBtn').addEventListener('click', () => {
+                window.history.back();
+            });
+            
+            document.getElementById('newSectionBtn').addEventListener('click', () => {
+                window.location.href = '/';
+            });
+            
+            // Lancer l'animation de confettis
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#9c6fff', '#5448de', '#ffffff']
+            });
+        });
+    </script>
+</body>
+</html> 
